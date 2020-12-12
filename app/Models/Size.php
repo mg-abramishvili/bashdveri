@@ -9,6 +9,10 @@ class Size extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'size', 'size_price'
+    ];
+
     public function products()
     {
         return $this->belongsToMany('App\Models\Product');

@@ -14,24 +14,27 @@ class FrontProductController extends Controller
     {
         //$products = Product::with('colors')->get();
         //$products = Color::with('products')->where('color', 'Красный1')->get();
-        $products = Color::with('products')->get();
-        return view('frontend.products.index', compact('products'));
+        $products_all = Product::all();
+        $products = Product::with('colors', 'sizes')->get();
+        return view('frontend.products.index', compact('products', 'products_all'));
     }
 
-    public function filterColor(Request $request)
+    public function filterColor(Request $request, $filtercolor, $filtersize)
     {
-        $products_all = Color::with('products')->get();
-        $products = QueryBuilder::for(Color::with('products'))
-                                ->allowedFilters([AllowedFilter::exact('color')])
-                                ->get();
-        $diff = $products_all->diff($products);
-        $diff->all();
-        return view('frontend.products.filter', compact('products','products_all', 'diff'));
+        $products_all = Product::all();
+
+        $products = Product::with('colors', 'sizes')->get();
+
+        //dd($filtercolor, $filtersize);
+        $filtercolor = explode(',', $filtercolor);
+        $filtersize = explode(',', $filtersize);
+
+        return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize'));
     }
 
-    public function show($id)
+    public function show($id, $productcolor, $productsize)
     {
         $product = Product::find($id);
-        return view('frontend.products.show', compact('product'));
+        return view('frontend.products.show', compact('product', 'productcolor', 'productsize'));
     }
 }

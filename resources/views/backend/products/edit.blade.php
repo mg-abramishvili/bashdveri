@@ -54,11 +54,14 @@
                     <div class="col-3">
                         <input class="color_image{{$color->id}}" type="file" name="color_image" x-ref="color_image">
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <input type="text" name="color" value="{{ $color->color }}" class="form-control">
                     </div>
                     <div class="col-3">
-                        <button type="submit" class="btn btn-sm btn-success">Сохранить</button>
+                        <input type="text" name="color_price" value="{{ $color->color_price }}" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
                     </div>
                 </div>
             </form>
@@ -142,6 +145,7 @@
                 <form action="{{ route('color.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
                     <input type="hidden" name="id" value="{{$product->id}}">
                     <input type="text" name="color" class="form-control mb-3">
+                    <input type="text" name="color_price" class="form-control mb-3">
                     <input class="color_image" type="file" name="color_image" x-ref="color_image">
                     @if ($errors->has('color_image'))
                         <div class="alert alert-danger">
@@ -150,6 +154,35 @@
                         </div>
                     @endif
                     <button type="submit" class="btn btn-lg btn-success">Добавить цвет</button>
+                </form>
+            </div>
+
+            <hr>
+
+            @foreach($product->sizes as $size)
+            <form action="{{ route('size.update', $size->id) }}" method="post" enctype="multipart/form-data">@csrf
+                <input type="hidden" name="id" value="{{$size->id}}">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <input type="text" name="size" value="{{ $size->size }}" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <input type="text" name="size_price" value="{{ $size->size_price }}" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
+                    </div>
+                </div>
+            </form>           
+            @endforeach
+
+            <div class="p-4 bg-info mt-4">
+                <h5>Добавить новый размер</h5>
+                <form action="{{ route('size.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
+                    <input type="hidden" name="id" value="{{$product->id}}">
+                    <input type="text" name="size" class="form-control mb-3">
+                    <input type="text" name="size_price" class="form-control mb-3">
+                    <button type="submit" class="btn btn-lg btn-success">Добавить размер</button>
                 </form>
             </div>
 
