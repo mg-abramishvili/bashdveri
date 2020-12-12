@@ -1,0 +1,128 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Product;
+use App\Models\Color;
+use App\Models\Size;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function index()
+    {
+        $products = Product::all();
+        return view('backend.products.index', compact('products'));
+    }
+
+    public function create()
+    {
+        return view('backend.products.create');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        return view('backend.products.edit', compact('product'));
+    }
+
+    public function file($type)
+    {
+
+        switch ($type) {
+            case 'upload':
+                return $this->upload();
+
+
+        }
+
+        return \Response::make('success', 200, [
+            'Content-Disposition' => 'inline',
+        ]);
+    }
+
+    public function upload()
+    {
+
+        if (request()->file('image')) {
+            $file = request()->file('image');
+
+            $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/uploads', $filename);
+
+            return \Response::make('/uploads/' . $filename, 200, [
+                'Content-Disposition' => 'inline',
+            ]);
+        }
+
+        if (request()->file('color_image')) {
+            $file = request()->file('color_image');
+
+            $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/uploads', $filename);
+
+            return \Response::make('/uploads/' . $filename, 200, [
+                'Content-Disposition' => 'inline',
+            ]);
+        }
+
+    }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/backend/products');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $data = request()->all();
+        $products = new Product();
+        $products->title = $data['title'];
+        $products->description = $data['description'];
+        //$products->image = $data['image'];
+        $products->save();
+        return redirect('/backend/products');
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'price' => 'required',
+        ]);
+
+        $data = request()->all();
+        $products = Product::find($data['id']);
+        $products->title = $data['title'];
+        $products->price = $data['price'];
+        $products->description = $data['description'];
+        $products->image = $data['image'];
+        $products->save();
+        return redirect('/backend/products');
+    }
+
+    public function addColor(Request $request) {
+        $data = request()->all();
+        $products = Product::find($data['id']);
+        $color = new Color(['color' => $data['color'], 'color_image' => $data['color_image']]);
+
+        $products->colors()->save($color);
+        return back();
+    }
+
+    public function updateColor(Request $request) {
+        $data = request()->all();
+        $color = Color::find($data['id']);
+        $color->color = $data['color'];
+        $color->color_image = $data['color_image'];
+        $color->save();
+        return back();
+    }
+}
