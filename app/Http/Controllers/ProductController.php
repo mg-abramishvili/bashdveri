@@ -44,17 +44,6 @@ class ProductController extends Controller
     public function upload()
     {
 
-        if (request()->file('image')) {
-            $file = request()->file('image');
-
-            $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path() . '/uploads', $filename);
-
-            return \Response::make('/uploads/' . $filename, 200, [
-                'Content-Disposition' => 'inline',
-            ]);
-        }
-
         if (request()->file('color_image')) {
             $file = request()->file('color_image');
 
@@ -86,7 +75,11 @@ class ProductController extends Controller
         $products = new Product();
         $products->title = $data['title'];
         $products->description = $data['description'];
-        //$products->image = $data['image'];
+        $products->type = $data['type'];
+        $products->construct_type = $data['construct_type'];
+        $products->manufacturer = $data['manufacturer'];
+        $products->surface = $data['surface'];
+        $products->style = $data['style'];
         $products->save();
         return redirect('/backend/products');
     }
@@ -96,6 +89,12 @@ class ProductController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'price' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'construct_type' => 'required',
+            'manufacturer' => 'required',
+            'surface' => 'required',
+            'style' => 'style',
         ]);
 
         $data = request()->all();
@@ -103,7 +102,11 @@ class ProductController extends Controller
         $products->title = $data['title'];
         $products->price = $data['price'];
         $products->description = $data['description'];
-        $products->image = $data['image'];
+        $products->type = $data['type'];
+        $products->construct_type = $data['construct_type'];
+        $products->manufacturer = $data['manufacturer'];
+        $products->surface = $data['surface'];
+        $products->style = $data['style'];
         $products->save();
         return redirect('/backend/products');
     }

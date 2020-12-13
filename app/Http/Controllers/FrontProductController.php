@@ -15,7 +15,7 @@ class FrontProductController extends Controller
         //$products = Product::with('colors')->get();
         //$products = Color::with('products')->where('color', 'Красный1')->get();
         $products_all = Product::all();
-        $products = Product::with('colors', 'sizes')->paginate(1);
+        $products = Product::with('colors', 'sizes')->get();
         return view('frontend.products.index', compact('products', 'products_all'));
     }
 

@@ -53,7 +53,7 @@
 
         <div class="col-12 col-md-9">
         <div class="row">
-                @forelse($products as $product)
+                @foreach($products as $product)
                         <div class="col-12 col-md-3">
                             <a href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
                                 
@@ -73,9 +73,7 @@
                                 
                             </a>
                         </div>
-                @empty
-                    <div class="col-12">Пусто &#9785;</div>
-                @endforelse
+                @endforeach
             </div>
         </div>
     </div>

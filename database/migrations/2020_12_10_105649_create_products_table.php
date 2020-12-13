@@ -17,7 +17,11 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            //$table->string('image');
+            $table->string('style');
+            $table->string('type');
+            $table->string('manufacturer');
+            $table->string('construct_type');
+            $table->string('surface');
             $table->timestamps();
         });
     }

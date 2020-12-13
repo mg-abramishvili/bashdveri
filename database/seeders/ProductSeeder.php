@@ -20,7 +20,11 @@ class ProductSeeder extends Seeder
             'id' => '1',
             'title' => 'Гладкая',
             'description' => 'Описание двери Гладкая',
-            //'image' => '/img/no-image.jpg',
+            'style' => 'Классика',
+            'type' => 'глухая',
+            'construct_type' => 'щитовая',
+            'surface' => 'ламинация',
+            'manufacturer' => 'Дверлайн',
         ]);
     }
 }

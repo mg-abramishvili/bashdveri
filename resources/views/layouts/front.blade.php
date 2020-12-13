@@ -39,11 +39,15 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse"><ul id="menu-top-menu" class="navbar-nav mr-auto"><li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7 nav-item"><a title="Каталог" href="/shop/" class="nav-link">Каталог</a></li>
-<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9 nav-item"><a title="Отзывы" href="#" class="nav-link">Отзывы</a></li>
-<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10 nav-item"><a title="Акции" href="#" class="nav-link">Акции</a></li>
-<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11 nav-item"><a title="Контакты" href="#" class="nav-link">Контакты</a></li>
-</ul></div>                            </div>
+                                <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                                    <ul id="menu-top-menu" class="navbar-nav mr-auto">
+                                        <li class="nav-item"><a href="/products/" class="nav-link">Каталог</a></li>
+                                        <li class="nav-item"><a href="#" class="nav-link">Отзывы</a></li>
+                                        <li class="nav-item"><a href="#" class="nav-link">Акции</a></li>
+                                        <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                     <div class="col-12 header-tel">
