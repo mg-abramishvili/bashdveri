@@ -344,6 +344,14 @@ footer {
 
 /* PRODUCT ITEM */
 
+.product-item-page-slider-item {
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 500px;
+}
+
 .product-item-page .price {
     color: #bea67c;
     font-size: 42px;
