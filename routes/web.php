@@ -15,18 +15,18 @@ Auth::routes([
 ]);
 
 // PRODUCTS (BACKEND)
-Route::resource('/backend/products', ProductController::class);
+Route::resource('/backend/products', ProductController::class)->middleware('auth');
 Route::get('/backend/products/delete/{id}','App\Http\Controllers\ProductController@delete')->middleware('auth');
 Route::post('/backend/products/file/{method}','App\Http\Controllers\ProductController@file')->middleware('auth');
 
 // COLORS (BACKEND)
-Route::post('/backend/add-color/{product}', 'App\Http\Controllers\ProductController@addColor')->name('color.add');
-Route::post('/backend/update-color/{color}', 'App\Http\Controllers\ProductController@updateColor')->name('color.update');
-Route::post('/backend/add-color/file/{method}','App\Http\Controllers\ProductController@file');
+Route::post('/backend/add-color/{product}', 'App\Http\Controllers\ProductController@addColor')->name('color.add')->middleware('auth');
+Route::post('/backend/update-color/{color}', 'App\Http\Controllers\ProductController@updateColor')->name('color.update')->middleware('auth');
+Route::post('/backend/add-color/file/{method}','App\Http\Controllers\ProductController@file')->middleware('auth');
 
 // SIZES (BACKEND)
-Route::post('/backend/add-size/{product}', 'App\Http\Controllers\ProductController@addSize')->name('size.add');
-Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductController@updateSize')->name('size.update');
+Route::post('/backend/add-size/{product}', 'App\Http\Controllers\ProductController@addSize')->name('size.add')->middleware('auth');
+Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductController@updateSize')->name('size.update')->middleware('auth');
 
 
 // PRODUCTS (FRONTEND)
@@ -44,5 +44,3 @@ Route::get('/cart/update/{itemId}','App\Http\Controllers\CartController@update')
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
