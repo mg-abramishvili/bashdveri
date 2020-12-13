@@ -56,11 +56,20 @@
                 @forelse($products as $product)
                         <div class="col-12 col-md-3">
                             <a href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
-                                <img src="{{$color->color_image}}" style="width: 100px;">
+                                
+                                @foreach($product->colors as $color)
+                                    <img src="{{$color->color_image}}" style="width: 100px;">
+                                @endforeach
+
                                 <h5>{{$product->title}}</h5>
                                 
-                                <span>{{ $color->color }}</span>
-                                <span>{{ $size->size }}</span>
+                                @foreach($product->colors as $color)
+                                    <span>{{ $color->color }}</span>
+                                @endforeach
+
+                                @foreach($product->sizes as $size)
+                                    <span>{{ $size->size }}</span>
+                                @endforeach
                                 
                             </a>
                         </div>
