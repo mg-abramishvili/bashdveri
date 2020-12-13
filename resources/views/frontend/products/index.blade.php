@@ -42,7 +42,7 @@
         $(':checkbox[name=size]:checked').each(function() {
             size_url = size_url + ',' + $(this).val();
         });
-        url = "http://localhost/filter/color=" + color_url + "&size=" + size_url;
+        url = "/filter/color=" + color_url + "&size=" + size_url;
         $('#form_filter_url').attr('href', url);
     });
 </script>
