@@ -16,23 +16,39 @@
             <div id="out"></div>
 
             <form id="myForm" class="mt-4">
-                <div class="colors-box">
-                    @foreach($product->colors as $color)
-                        <div class="form-group">
-                            <input type="radio" id="{{ $color->id }}" name="color" value="{{ $color->id }}" data-price="{{ $color->color_price }}" data-selector=".product-item-page-slider-item{{ $color->id }}" @if($color->color == $productcolor) checked @endif>
-                            <label for="{{ $color->id }}">{{ $color->color }}</label>
+
+                <div class="row align-items-center mb-3">
+                    <div class="col-12 col-md-2">
+                        <strong>Цвет</strong>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        <div class="colors-box">
+                            @foreach($product->colors as $color)
+                                <div class="form-group">
+                                    <input type="radio" id="color{{ $color->id }}" name="color" value="{{ $color->id }}" data-price="{{ $color->color_price }}" data-selector=".product-item-page-slider-item{{ $color->id }}" @if($color->color == $productcolor) checked @endif>
+                                    <label for="color{{ $color->id }}">{{ $color->color }}</label>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
                 </div>
 
-                <div class="sizes-box">
-                    @foreach($product->sizes as $size)
-                        <div class="form-group">
-                            <input type="radio" id="{{ $size->id }}" name="size" value="{{ $size->id }}" data-price="{{ $size->size_price }}" @if($size->size == $productsize) checked @endif>
-                            <label for="{{ $size->id }}">{{ $size->size }}</label>
+                <div class="row align-items-center mb-3">
+                    <div class="col-12 col-md-2">
+                        <strong>Размер</strong>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        <div class="sizes-box">
+                            @foreach($product->sizes as $size)
+                                <div class="form-group">
+                                    <input type="radio" id="size{{ $size->id }}" name="size" value="{{ $size->id }}" data-price="{{ $size->size_price }}" @if($size->size == $productsize) checked @endif>
+                                    <label for="size{{ $size->id }}">{{ $size->size }}</label>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
                 </div>
+
             </form>
 
             <div class="price mb-4"></div>
