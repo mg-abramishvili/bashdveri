@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'image'
+        'title', 'description', 'type', 'construct_type', 'manufacturer', 'surface', 'style'
     ];
 
     public function colors()

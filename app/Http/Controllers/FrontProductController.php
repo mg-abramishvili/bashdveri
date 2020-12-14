@@ -19,17 +19,32 @@ class FrontProductController extends Controller
         return view('frontend.products.index', compact('products', 'products_all'));
     }
 
-    public function filterColor(Request $request, $filtercolor, $filtersize)
+    public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
         $products_all = Product::all();
 
-        $products = Product::with('colors', 'sizes')->get();
-
-        //dd($filtercolor, $filtersize);
         $filtercolor = explode(',', $filtercolor);
         $filtersize = explode(',', $filtersize);
+        $filtermanufacturer = explode(',', $filtermanufacturer);
 
-        return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize'));
+        $products = Product::with(
+            [
+                'colors' => function ($query) use ($filtercolor) {
+                    $query->where('color');
+                    foreach ($filtercolor as $fcolor) {
+                        $query->orWhere('color', $fcolor);
+                    }
+                },
+                'sizes' => function ($query) use ($filtersize) {
+                    $query->where('size');
+                    foreach ($filtersize as $fsize) {
+                        $query->orWhere('size', $fsize);
+                    }
+                }
+            ])
+            ->get();
+        
+        return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize', 'filtermanufacturer'));
     }
 
     public function show($id, $productcolor, $productsize)

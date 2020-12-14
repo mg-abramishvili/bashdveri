@@ -26,6 +26,15 @@
                     @endforeach
                 @endforeach
 
+                <h5>Производитель</h5>
+
+                @foreach($products_all as $manufacturer)
+                        <div class="form-group">
+                            <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}" @foreach($filtermanufacturer as $fm) @if($manufacturer->manufacturer == $fm) checked @endif @endforeach>
+                            <label for="{{$manufacturer->manufacturer}}"> {{$manufacturer->manufacturer}}</label>
+                        </div>
+                @endforeach
+
                 <a id="form_filter_url" href="">Применить</a>
 
                 <script>
@@ -56,22 +65,15 @@
                 @forelse($products as $product)
                     @foreach($product->colors as $color)
                         @foreach($product->sizes as $size)
-                        @foreach($filtercolor as $fc)
-                        @foreach($filtersize as $fs)
-                        @if(($color->color == $fc) && ($size->size == $fs))
-                        <div class="col-12 col-md-3">
-                            <a href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
-                                <img src="{{$color->color_image}}" style="width: 100px;">
-                                <h5>{{$product->title}}</h5>
-                                
-                                <span>{{ $color->color }}</span>
-                                <span>{{ $size->size }}</span>
-                                
-                            </a>
-                        </div>
-                        @endif
-                        @endforeach
-                        @endforeach
+                            <div class="col-12 col-md-3">
+                                <a href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
+                                    <img src="{{$color->color_image}}" style="width: 100px;">
+                                    <h5>{{$product->title}}</h5>
+                                    <span>{{ $color->color }}</span>
+                                    <span>{{ $size->size }}</span>
+                                    <span>{{ $product->manufacturer }}</span>
+                                </a>
+                            </div>
                         @endforeach
                     @endforeach
                 @empty

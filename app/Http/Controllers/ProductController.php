@@ -88,19 +88,17 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'price' => 'required',
             'description' => 'required',
             'type' => 'required',
             'construct_type' => 'required',
             'manufacturer' => 'required',
             'surface' => 'required',
-            'style' => 'style',
+            'style' => 'required',
         ]);
 
         $data = request()->all();
         $products = Product::find($data['id']);
         $products->title = $data['title'];
-        $products->price = $data['price'];
         $products->description = $data['description'];
         $products->type = $data['type'];
         $products->construct_type = $data['construct_type'];
