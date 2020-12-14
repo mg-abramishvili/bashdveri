@@ -42,6 +42,12 @@ class FrontProductController extends Controller
                     }
                 }
             ])
+            ->where(function ($query) use ($filtermanufacturer) {
+                $query->where('manufacturer');
+                foreach ($filtermanufacturer as $fmanufacturer) {
+                    $query->orWhere('manufacturer', $fmanufacturer);
+                }
+            })
             ->get();
         
         return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize', 'filtermanufacturer'));
