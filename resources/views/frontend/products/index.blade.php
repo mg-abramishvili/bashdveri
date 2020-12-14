@@ -31,6 +31,7 @@
 <script>
     var color_url = "";
     var size_url = "";
+    var manufacturer_url = "";
     var url = "";
 
     $(':checkbox').change(function() {
@@ -42,7 +43,29 @@
         $(':checkbox[name=size]:checked').each(function() {
             size_url = size_url + ',' + $(this).val();
         });
-        url = "/filter/color=" + color_url + "&size=" + size_url;
+        $(':checkbox[name=manufacturer]:checked').each(function() {
+            manufacturer_url = manufacturer_url + ',' + $(this).val();
+        });
+
+        if(color_url == '') {
+            color_url_f = '*'
+        } else {
+            color_url_f = color_url;
+        }
+
+        if(size_url == '') {
+            size_url_f = '*'
+        } else {
+            size_url_f = size_url;
+        }
+
+        if(manufacturer_url == '') {
+            manufacturer_url_f = '*'
+        } else {
+            manufacturer_url_f = manufacturer_url;
+        }
+        
+        url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&manufacturer=" + manufacturer_url_f;
         $('#form_filter_url').attr('href', url);
     });
 </script>

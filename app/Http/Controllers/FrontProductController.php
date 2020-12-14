@@ -30,26 +30,32 @@ class FrontProductController extends Controller
         $products = Product::with(
             [
                 'colors' => function ($query) use ($filtercolor) {
-                    $query->where('color');
-                    foreach ($filtercolor as $fcolor) {
-                        $query->orWhere('color', $fcolor);
+                    if ($filtercolor[0] !== '*') {
+                        $query->where('color');
+                        foreach ($filtercolor as $fcolor) {
+                            $query->orWhere('color', $fcolor);
+                        }
                     }
                 },
                 'sizes' => function ($query) use ($filtersize) {
-                    $query->where('size');
-                    foreach ($filtersize as $fsize) {
-                        $query->orWhere('size', $fsize);
+                    if ($filtersize[0] !== '*') {
+                        $query->where('size');
+                        foreach ($filtersize as $fsize) {
+                            $query->orWhere('size', $fsize);
+                        }
                     }
                 }
             ])
             ->where(function ($query) use ($filtermanufacturer) {
-                $query->where('manufacturer');
-                foreach ($filtermanufacturer as $fmanufacturer) {
-                    $query->orWhere('manufacturer', $fmanufacturer);
+                if ($filtermanufacturer[0] !== '*') {
+                    $query->where('manufacturer');
+                    foreach ($filtermanufacturer as $fmanufacturer) {
+                        $query->orWhere('manufacturer', $fmanufacturer);
+                    }
                 }
             })
             ->get();
-        
+
         return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize', 'filtermanufacturer'));
     }
 
