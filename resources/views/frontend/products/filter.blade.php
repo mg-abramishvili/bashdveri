@@ -49,7 +49,7 @@
                     @foreach($product->colors as $color)
                         @foreach($product->sizes as $size)
                             <div class="col-12 col-md-3">
-                                <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
+                                <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->id }}/{{ $size->id }}">
 
                                     <div class="product-list-page-item-images">
                                         <div class="product-list-page-item-image" style="background-image: url({{$color->color_image}});"></div>

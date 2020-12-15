@@ -25,7 +25,7 @@
                         <div class="colors-box">
                             @foreach($product->colors as $color)
                                 <div class="form-group">
-                                    <input type="radio" id="color{{ $color->id }}" name="color" value="{{ $color->id }}" data-price="{{ $color->color_price }}" data-selector=".product-item-page-slider-item{{ $color->id }}" @if($color->color == $productcolor) checked @endif>
+                                    <input type="radio" id="color{{ $color->id }}" name="color" value="{{ $color->id }}" data-price="{{ $color->color_price }}" data-selector=".product-item-page-slider-item{{ $color->id }}" @if($color->id == $productcolor) checked @endif>
                                     <label for="color{{ $color->id }}">{{ $color->color }}</label>
                                 </div>
                             @endforeach
@@ -41,7 +41,7 @@
                         <div class="sizes-box">
                             @foreach($product->sizes as $size)
                                 <div class="form-group">
-                                    <input type="radio" id="size{{ $size->id }}" name="size" value="{{ $size->id }}" data-price="{{ $size->size_price }}" @if($size->size == $productsize) checked @endif>
+                                    <input type="radio" id="size{{ $size->id }}" name="size" value="{{ $size->id }}" data-price="{{ $size->size_price }}" @if($size->id == $productsize) checked @endif>
                                     <label for="size{{ $size->id }}">{{ $size->size }}</label>
                                 </div>
                             @endforeach
@@ -81,6 +81,8 @@
             $('.price').html(price_max + ' ₽');
 
             $('#out').html('{{ $product->title }} Цвет: '+ color +' Цена: '+ price_max +'руб.');
+
+            $('.product-item-page-slider').flickity( 'selectCell', '.product-item-page-slider-item{{ $productcolor }}' );
         });
 
         $('#myForm input').on('change', function() {

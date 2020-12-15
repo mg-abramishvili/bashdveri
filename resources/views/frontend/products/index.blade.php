@@ -44,7 +44,7 @@
             <div class="row">
                 @foreach($products as $product)
                     <div class="col-12 col-md-3">
-                        <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
+                        <a class="product-list-page-item" href="/products/{{$product->id}}/@foreach($product->colors as $color)@if($loop->first){{ $color->id }}@endif{{""}}@endforeach/@foreach($product->sizes as $size)@if($loop->first){{ $size->id }}@endif{{""}}@endforeach">
                             
                             <div class="product-list-page-item-images">
                                 @foreach($product->colors as $color)
