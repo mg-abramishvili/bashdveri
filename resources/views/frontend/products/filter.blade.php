@@ -35,66 +35,40 @@
                         </div>
                 @endforeach
 
-                <a id="form_filter_url" href="">Применить</a>
+                <a id="form_filter_url" href="" class="btn-standard">Применить</a>
 
-                <script>
-                    var color_url = "";
-                    var size_url = "";
-                    var manufacturer_url = "";
-                    var url = "";
 
-                    $(':checkbox').change(function() {
-                        color_url = "";
-                        size_url = "";
-                        $(':checkbox[name=color]:checked').each(function() {
-                            color_url = color_url + ',' + $(this).val();
-                        });
-                        $(':checkbox[name=size]:checked').each(function() {
-                            size_url = size_url + ',' + $(this).val();
-                        });
-                        $(':checkbox[name=manufacturer]:checked').each(function() {
-                            manufacturer_url = manufacturer_url + ',' + $(this).val();
-                        });
-
-                        if(color_url == '') {
-                            color_url_f = '*'
-                        } else {
-                            color_url_f = color_url;
-                        }
-
-                        if(size_url == '') {
-                            size_url_f = '*'
-                        } else {
-                            size_url_f = size_url;
-                        }
-
-                        if(manufacturer_url == '') {
-                            manufacturer_url_f = '*'
-                        } else {
-                            manufacturer_url_f = manufacturer_url;
-                        }
-                        
-                        url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&manufacturer=" + manufacturer_url_f;
-                        $('#form_filter_url').attr('href', url);
-                    });
-                </script>
                 
 
             </div>
         </div>
 
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9 product-list-page">
             <div class="row">
                 @forelse($products as $product)
                     @foreach($product->colors as $color)
                         @foreach($product->sizes as $size)
                             <div class="col-12 col-md-3">
-                                <a href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
-                                    <img src="{{$color->color_image}}" style="width: 100px;">
-                                    <h5>{{$product->title}}</h5>
-                                    <span>{{ $color->color }}</span>
+                                <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->color }}/{{ $size->size }}">
+
+                                    <div class="product-list-page-item-images">
+                                        <div class="product-list-page-item-image" style="background-image: url({{$color->color_image}});"></div>
+                                    </div>
+
+                                    <div class="product-list-page-item-prices">
+                                        @if($color->color_price > $size->size_price)
+                                            <p class="price m-0">{{ $color->color_price }} ₽</p>
+                                        @else
+                                            <p class="price m-0">{{ $size->size_price }} ₽</p>
+                                        @endif
+                                    </div>
+
+                                    <h3 class="mt-1 mb-2">{{$product->title}}</h3>
+
+                                    <span style=>{{ $color->color }}</span>
                                     <span>{{ $size->size }}</span>
-                                    <span>{{ $product->manufacturer }}</span>
+
+                                    <span style="display:none;">{{ $product->manufacturer }}</span>
                                 </a>
                             </div>
                         @endforeach
@@ -106,4 +80,56 @@
         </div>
     </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $('.product-list-page-item-images').flickity({
+        cellAlign: 'center',
+        contain: true,
+        prevNextButtons: false,
+        pageDots: false,
+        });
+    </script>
+
+    <script>
+        var color_url = "";
+        var size_url = "";
+        var manufacturer_url = "";
+        var url = "";
+
+        $(':checkbox').change(function() {
+            color_url = "";
+            size_url = "";
+            $(':checkbox[name=color]:checked').each(function() {
+                color_url = color_url + ',' + $(this).val();
+            });
+            $(':checkbox[name=size]:checked').each(function() {
+                size_url = size_url + ',' + $(this).val();
+            });
+            $(':checkbox[name=manufacturer]:checked').each(function() {
+                manufacturer_url = manufacturer_url + ',' + $(this).val();
+            });
+
+            if(color_url == '') {
+                color_url_f = '*'
+            } else {
+                color_url_f = color_url;
+            }
+
+            if(size_url == '') {
+                size_url_f = '*'
+            } else {
+                size_url_f = size_url;
+            }
+
+            if(manufacturer_url == '') {
+                manufacturer_url_f = '*'
+            } else {
+                manufacturer_url_f = manufacturer_url;
+            }
+            
+            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&manufacturer=" + manufacturer_url_f;
+            $('#form_filter_url').attr('href', url);
+        });
+    </script>
 @endsection
