@@ -8,6 +8,7 @@
         </div>
 
         <div class="col-12 col-md-6">
+            <div class="box">
             <form action="/backend/products/{{$product->id}}" method="post" enctype="multipart/form-data">@csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{$product->id}}">
@@ -91,9 +92,11 @@
 
                 <button type="submit" class="btn btn-lg btn-success">Сохранить</button>
             </form>
+            </div>
         </div>
 
         <div class="col-12 col-md-6">
+            <div class="box">
             <div class="row align-items-center mb-4">
                 <div class="col-6">
                     <h3 class="m-0">Цвета</h3>
@@ -196,6 +199,7 @@
                 }
             </script>            
             @endforeach
+            </div>
 
             <div class="modal" id="modal-color">
                 <div class="modal-dialog">
@@ -223,8 +227,7 @@
                 </div>
             </div>
 
-            <hr>
-
+            <div class="box mt-4 mb-4">
             <div class="row align-items-center mb-4">
                 <div class="col-6">
                     <h3 class="m-0">Размеры</h3>
@@ -250,6 +253,7 @@
                 </div>
             </form>           
             @endforeach
+            </div>
 
             <div class="modal" id="modal-size">
                 <div class="modal-dialog">

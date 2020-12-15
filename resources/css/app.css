@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import '/css/bootstrap.min.css';
+
+body {
+    background-color: #f7f7f7;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 1px 16px rgba(0,0,0,0.1);
+}

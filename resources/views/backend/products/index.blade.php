@@ -12,14 +12,14 @@
         </div>
 
         <div class="page">
-        
-            <table class="table table-bordered table-hover">
+        <div class="box p-3">
+            <table class="table table-bordered table-hover mb-0">
                 @forelse($products as $product)
                 <tr>
                     <td style="text-align: left; padding-left: 20px; padding-right: 20px;">
                         {{$product->title}}
                     </td>
-                    <td style="width: 200px;">
+                    <td style="width: 200px; text-align: center;">
                         <a href="/backend/products/{{$product->id}}/edit" class="btn btn-sm btn-warning">Изменить</a>
                         <a href="/backend/products/delete/{{$product->id}}" class="btn btn-sm btn-danger">Удалить</a>
                     </td>
@@ -32,6 +32,7 @@
                 </tr>
                 @endforelse
             </table>
+        </div>
         </div>
     </div>
 @endsection
