@@ -4,7 +4,7 @@
     <div>
         <div class="row align-items-center mb-4">
             <div class="col-6">
-                <h1>Новый товар</h1>
+                <h1>Новая дверь</h1>
             </div>
         </div>
 
@@ -54,11 +54,11 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="surface" placeholder="Поверхность">
+                        <input type="text" class="form-control" name="surface" placeholder="Покрытие">
                         @if ($errors->has('surface'))
                             <div class="alert alert-danger">
                                 <!--{{ $errors->first('surface') }}-->
-                                Укажите поверхность
+                                Укажите покрытие
                             </div>
                         @endif
                     </div>

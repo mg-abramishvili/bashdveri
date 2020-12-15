@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <h1>{{$product->title}}</h1>
-            <p style="color: #999">Изменение товара</p>
+            <p style="color: #999">Изменение двери</p>
         </div>
 
         <div class="col-12 col-md-6">
@@ -14,7 +14,8 @@
                 <input type="hidden" name="id" value="{{$product->id}}">
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" placeholder="Название" value="{{ $product->title }}">
+                    <label for="title" class="font-weight-bold">Название</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
                     @if ($errors->has('title'))
                         <div class="alert alert-danger">
                             <!--{{ $errors->first('title') }}-->
@@ -24,7 +25,8 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="style" placeholder="Подкатегория" value="{{ $product->style }}">
+                <label for="style" class="font-weight-bold">Подкатегория</label>
+                    <input type="text" class="form-control" id="style" name="style" placeholder="Подкатегория" value="{{ $product->style }}">
                     @if ($errors->has('style'))
                         <div class="alert alert-danger">
                             <!--{{ $errors->first('style') }}-->
@@ -36,7 +38,8 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="type" placeholder="Тип двери" value="{{ $product->type }}">
+                            <label for="type" class="font-weight-bold">Тип двери</label>
+                            <input type="text" class="form-control" id="type" name="type" placeholder="Тип двери" value="{{ $product->type }}">
                             @if ($errors->has('type'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('type') }}-->
@@ -47,7 +50,8 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="construct_type" placeholder="Конструкция" value="{{ $product->construct_type }}">
+                        <label for="construct_type" class="font-weight-bold">Конструкция</label>
+                            <input type="text" class="form-control" id="construct_type" name="construct_type" placeholder="Конструкция" value="{{ $product->construct_type }}">
                             @if ($errors->has('construct_type'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('construct_type') }}-->
@@ -58,18 +62,20 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="surface" placeholder="Поверхность" value="{{ $product->surface }}">
+                            <label for="surface" class="font-weight-bold">Покрытие</label>
+                            <input type="text" class="form-control" id="surface" name="surface" placeholder="Поверхность" value="{{ $product->surface }}">
                             @if ($errors->has('surface'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('surface') }}-->
-                                    Укажите поверхность
+                                    Укажите покрытие
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="manufacturer" placeholder="Производитель" value="{{ $product->manufacturer }}">
+                            <label for="manufacturer" class="font-weight-bold">Производитель</label>
+                            <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="Производитель" value="{{ $product->manufacturer }}">
                             @if ($errors->has('manufacturer'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('manufacturer') }}-->
@@ -81,7 +87,8 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea rows="4" class="form-control" name="description" placeholder="Описание">{{$product->description}}</textarea>
+                    <label for="description" class="font-weight-bold">Описание</label>
+                    <textarea rows="4" class="form-control" id="description" name="description" placeholder="Описание">{{$product->description}}</textarea>
                     @if ($errors->has('description'))
                         <div class="alert alert-danger">
                             <!--{{ $errors->first('description') }}-->

@@ -42,7 +42,7 @@
                     <ul class="navbar-nav ml-auto">
                         
                             <li class="nav-item">
-                                <a class="nav-link" href="/backend/products">Товары</a>
+                                <a class="nav-link" href="/backend/products">Двери</a>
                             </li>
 
                             <li class="nav-item">

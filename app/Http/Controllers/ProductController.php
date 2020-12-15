@@ -69,6 +69,11 @@ class ProductController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
+            'type' => 'required',
+            'construct_type' => 'required',
+            'manufacturer' => 'required',
+            'surface' => 'required',
+            'style' => 'required',
         ]);
 
         $data = request()->all();

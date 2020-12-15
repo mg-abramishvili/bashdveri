@@ -4,10 +4,10 @@
     <div>
         <div class="row align-items-center mb-4">
             <div class="col-6">
-                <h1>Товары</h1>
+                <h1>Двери</h1>
             </div>
             <div class="col-6" style="text-align: right;">
-                <a href="/backend/products/create" class="btn btn-primary">Добавить товар</a>
+                <a href="/backend/products/create" class="btn btn-primary">Добавить дверь</a>
             </div>
         </div>
 
