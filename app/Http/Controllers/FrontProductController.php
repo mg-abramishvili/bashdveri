@@ -16,7 +16,7 @@ class FrontProductController extends Controller
         //$products = Color::with('products')->where('color', 'Красный1')->get();
 
         $products_all = Product::with(['colors' => function($query){
-            $query->select('color.id', 'color.color')->groupBy('color');
+            $query->groupBy('color');
         }])->get();
 
         $products = Product::with('colors', 'sizes')->get();
@@ -27,7 +27,7 @@ class FrontProductController extends Controller
     public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
         $products_all = Product::with(['colors' => function($query){
-            $query->select('color_id', 'color')->groupBy('color');
+            $query->groupBy('color');
         }])->get();
 
         $filtercolor = explode(',', $filtercolor);
