@@ -112,6 +112,8 @@
         $(':checkbox').change(function() {
             color_url = "";
             size_url = "";
+            style_url = "";
+            manufacturer_url = "";
             $(':checkbox[name=color]:checked').each(function() {
                 color_url = color_url + ',' + $(this).val();
             });

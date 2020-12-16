@@ -107,17 +107,19 @@
         $(':checkbox').change(function() {
             color_url = "";
             size_url = "";
+            style_url = "";
+            manufacturer_url = "";
             $(':checkbox[name=color]:checked').each(function() {
                 color_url = color_url + ',' + $(this).val();
             });
             $(':checkbox[name=size]:checked').each(function() {
                 size_url = size_url + ',' + $(this).val();
             });
-            $(':checkbox[name=manufacturer]:checked').each(function() {
-                manufacturer_url = manufacturer_url + ',' + $(this).val();
-            });
             $(':checkbox[name=style]:checked').each(function() {
                 style_url = style_url + ',' + $(this).val();
+            });
+            $(':checkbox[name=manufacturer]:checked').each(function() {
+                manufacturer_url = manufacturer_url + ',' + $(this).val();
             });
 
             if(color_url == '') {
