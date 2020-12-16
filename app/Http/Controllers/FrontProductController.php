@@ -26,6 +26,13 @@ class FrontProductController extends Controller
         ])
         ->get();
 
+        $products_types = Product::with([
+            'types' => function($query){
+                $query->groupBy('type');
+            }
+        ])
+        ->get();
+
         $products_styles = Product::all();
         $products_styles = $products_styles->unique(function ($item) {
             return $item['style'];
@@ -40,10 +47,10 @@ class FrontProductController extends Controller
 
         $products = Product::with('colors', 'sizes')->get();
 
-        return view('frontend.products.index', compact('products', 'products_colors', 'products_sizes', 'products_manufacturers', 'products_styles'));
+        return view('frontend.products.index', compact('products', 'products_colors', 'products_sizes', 'products_manufacturers', 'products_styles', 'products_types'));
     }
 
-    public function filterColor(Request $request, $filtercolor, $filtersize, $filterstyle, $filtermanufacturer)
+    public function filterColor(Request $request, $filtercolor, $filtersize, $filterstyle, $filtertype, $filtermanufacturer)
     {
         $products_colors = Product::with([
             'colors' => function($query){
@@ -55,6 +62,13 @@ class FrontProductController extends Controller
         $products_sizes = Product::with([
             'sizes' => function($query){
                 $query->groupBy('size');
+            }
+        ])
+        ->get();
+
+        $products_types = Product::with([
+            'types' => function($query){
+                $query->groupBy('type');
             }
         ])
         ->get();
@@ -74,6 +88,7 @@ class FrontProductController extends Controller
         $filtercolor = explode(',', $filtercolor);
         $filtersize = explode(',', $filtersize);
         $filterstyle = explode(',', $filterstyle);
+        $filtertype = explode(',', $filtertype);
         $filtermanufacturer = explode(',', $filtermanufacturer);
 
         $products = Product::with(
@@ -91,6 +106,14 @@ class FrontProductController extends Controller
                         $query->where('size');
                         foreach ($filtersize as $fsize) {
                             $query->orWhere('size', $fsize);
+                        }
+                    }
+                },
+                'types' => function ($query) use ($filtertype) {
+                    if ($filtertype[0] !== '*') {
+                        $query->where('type');
+                        foreach ($filtertype as $ftype) {
+                            $query->orWhere('type', $ftype);
                         }
                     }
                 }
@@ -112,13 +135,13 @@ class FrontProductController extends Controller
                 }
             })
             ->get();
-            
-        return view('frontend.products.filter', compact('products', 'products_colors', 'products_sizes', 'products_manufacturers', 'products_styles', 'filtercolor', 'filtersize', 'filtermanufacturer', 'filterstyle'));
+
+        return view('frontend.products.filter', compact('products', 'products_colors', 'products_sizes', 'products_styles', 'products_types', 'products_manufacturers', 'filtercolor', 'filtersize', 'filterstyle', 'filtertype', 'filtermanufacturer'));
     }
 
-    public function show($id, $productcolor, $productsize, $productstyle)
+    public function show($id, $productcolor, $productsize, $producttype)
     {
         $product = Product::find($id);
-        return view('frontend.products.show', compact('product', 'productcolor', 'productsize', 'productstyle'));
+        return view('frontend.products.show', compact('product', 'productcolor', 'productsize', 'producttype'));
     }
 }

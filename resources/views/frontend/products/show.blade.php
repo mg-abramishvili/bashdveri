@@ -19,6 +19,22 @@
 
                 <div class="row align-items-center mb-3">
                     <div class="col-12 col-md-2">
+                        <strong>Тип двери</strong>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        <div class="types-box">
+                            @foreach($product->types as $type)
+                                <div class="form-group">
+                                    <input type="radio" id="type{{ $type->id }}" name="type" value="{{ $type->id }}" data-price="{{ $type->type_price }}" @if($type->id == $producttype) checked @endif>
+                                    <label for="type{{ $type->id }}">{{ $type->type }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mb-3">
+                    <div class="col-12 col-md-2">
                         <strong>Цвет</strong>
                     </div>
                     <div class="col-12 col-md-10">
@@ -52,7 +68,8 @@
             </form>
 
             <div class="price mb-4"></div>
-            <a href="{{ route('cart.add', $product->id) }}" class="btn-standard">В корзину</a>
+            <!--<a href="{{ route('cart.add', $product->id) }}" class="btn-standard">В корзину</a>-->
+            <a href="#" class="btn-standard">В корзину</a>
         </div>
     </div>
 
@@ -84,11 +101,18 @@
             }
             var size = $('input[name=size]:checked', '#myForm').val();
 
-            var price_max = Math.max(color_price, size_price);
+            if(isNaN(parseInt($('input[name=type]:checked', '#myForm').attr("data-price")))) {
+                var type_price = '{{ $product->base_price }}';
+            } else {
+                var type_price = parseInt($('input[name=type]:checked', '#myForm').attr("data-price"));
+            }
+            var type = $('input[name=size]:checked', '#myForm').val();
+
+            var price_max = Math.max(color_price, size_price, type_price);
             
             $('.price').html(price_max + ' ₽');
 
-            $('#out').html('{{ $product->title }} Цвет: '+ color +' Цена: '+ price_max +'руб.');
+            $('#out').html('{{ $product->title }} Цвет: '+ color + 'Тип: ' + type + ' Цена: '+ price_max +'руб.');
 
             $('.product-item-page-slider').flickity( 'selectCell', '.product-item-page-slider-item{{ $productcolor }}' );
         });
@@ -107,14 +131,20 @@
             } else {
                 var size_price = parseInt($('input[name=size]:checked', '#myForm').attr("data-price"));
             }
-            
             var size = $('input[name=size]:checked', '#myForm').val();
 
-            var price_max = Math.max(color_price, size_price);
+            if(isNaN(parseInt($('input[name=type]:checked', '#myForm').attr("data-price")))) {
+                var type_price = '{{ $product->base_price }}';
+            } else {
+                var type_price = parseInt($('input[name=type]:checked', '#myForm').attr("data-price"));
+            }
+            var type = $('input[name=size]:checked', '#myForm').val();
+
+            var price_max = Math.max(color_price, size_price, type_price);
 
             $('.price').html(price_max + ' ₽');
 
-            $('#out').html('{{ $product->title }} Цвет: '+ color +' Цена: '+ price_max +'руб.')
+            $('#out').html('{{ $product->title }} Цвет: '+ color + 'Тип: ' + type + ' Цена: '+ price_max +'руб.')
             
             $('.product-item-page-slider').flickity( 'selectCell', color_slider_selector );
         });

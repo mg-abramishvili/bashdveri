@@ -31,11 +31,12 @@ Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductControll
 // TYPES (BACKEND)
 Route::post('/backend/add-type/{product}', 'App\Http\Controllers\ProductController@addType')->name('type.add')->middleware('auth');
 Route::post('/backend/update-type/{type}', 'App\Http\Controllers\ProductController@updateType')->name('type.update')->middleware('auth');
+Route::get('/backend/delete-type/{id}', 'App\Http\Controllers\ProductController@deleteType')->name('type.delete')->middleware('auth');
 
 // PRODUCTS (FRONTEND)
 Route::get('/products','App\Http\Controllers\FrontProductController@index');
-Route::get('/products/{id}/{productcolor}/{productsize}','App\Http\Controllers\FrontProductController@show');
-Route::get('/filter/color={filtercolor}&size={filtersize}&style={filterstyle}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
+Route::get('/products/{id}/{productcolor}/{productsize}/{producttype}','App\Http\Controllers\FrontProductController@show');
+Route::get('/filter/color={filtercolor}&size={filtersize}&style={filterstyle}&type={filtertype}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
 
 // CART
 Route::get('/add-to-cart/{product}','App\Http\Controllers\CartController@add')->name('cart.add');

@@ -7,7 +7,7 @@
             <p style="color: #999">Изменение двери</p>
         </div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-5">
             <div class="box">
             <form action="/backend/products/{{$product->id}}" method="post" enctype="multipart/form-data">@csrf
                 @method('PUT')
@@ -185,7 +185,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-7">
             <div class="box">
             <div class="row align-items-center mb-4">
                 <div class="col-6">
@@ -378,30 +378,20 @@
             <form action="{{ route('type.update', $type->id) }}" method="post" enctype="multipart/form-data" class="mb-3">@csrf
                 <input type="hidden" name="id" value="{{$type->id}}">
                 <div class="row align-items-center">
-                    <div class="col-7">
-                        <select id="type" name="type" class="form-control">
-                            <option value="{{ $type->type }}">{{ $type->type }}</option>
-                            <option value="глухая">глухая</option>
-                            <option value="остекленная">остекленная</option>
-                            <option value="зеркало">зеркало</option>
-                            <option value="молдинг">молдинг</option>
+                    <div class="col-6">
+                        <select id="type" name="type" class="form-control" style="display:none;">
+                            <option value="{{ $type->type }}" selected>{{ $type->type }}</option>
                         </select>
-                        <script>
-                            var optionValues =[];
-                            $('#type option').each(function(){
-                            if($.inArray(this.value, optionValues) >-1){
-                                $(this).remove()
-                            }else{
-                                optionValues.push(this.value);
-                            }
-                            });
-                        </script>
+                        <select class="form-control" disabled>
+                            <option value="{{ $type->type }}" selected>{{ $type->type }}</option>
+                        </select>
                     </div>
                     <div class="col-3">
                         <input type="text" name="type_price" value="{{ $type->type_price }}" class="form-control">
                     </div>
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-sm btn-success">OK</button>
+                        <a href="/backend/delete-type/{{$type->id}}" class="btn btn-sm btn-danger">Уд.</a>
                     </div>
                 </div>
             </form>           
@@ -418,7 +408,7 @@
                         <div class="modal-body">
                             <form action="{{ route('type.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
-                                <select id="type" name="type" class="form-control">
+                                <select name="type" class="form-control">
                                     <option value="глухая">глухая</option>
                                     <option value="остекленная">остекленная</option>
                                     <option value="зеркало">зеркало</option>

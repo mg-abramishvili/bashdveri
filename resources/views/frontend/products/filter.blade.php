@@ -5,6 +5,25 @@
         <div class="col-12 col-md-3">
             <div class="filter">
 
+            <h5>Тип двери</h5>
+                @foreach($products_types as $p_types)
+                    @foreach($p_types->types as $type)
+                        <div class="form-group">
+                            <input type="checkbox" id="{{$type->type}}" name="type" value="{{$type->type}}" @foreach($filtertype as $ftype) @if($type->type == $ftype) checked @endif @endforeach>
+                            <label for="{{$type->type}}"> {{$type->type}}</label>
+                        </div>
+                    @endforeach
+                @endforeach
+
+                <h5>Стиль</h5>
+
+                @foreach($products_styles as $style)
+                    <div class="form-group">
+                        <input type="checkbox" id="{{$style->style}}" name="style" value="{{$style->style}}" @foreach($filterstyle as $fstyle) @if($style->style == $fstyle) checked @endif @endforeach>
+                        <label for="{{$style->style}}"> {{$style->style}}</label>
+                    </div>
+                @endforeach
+
             <h5>Цвет</h5>
                 @foreach($products_colors as $p_colors)
                     @foreach($p_colors->colors as $color)
@@ -28,14 +47,7 @@
                 @endforeach
                 -->
 
-                <h5>Стиль</h5>
-
-                @foreach($products_styles as $style)
-                    <div class="form-group">
-                        <input type="checkbox" id="{{$style->style}}" name="style" value="{{$style->style}}" @foreach($filterstyle as $fstyle) @if($style->style == $fstyle) checked @endif @endforeach>
-                        <label for="{{$style->style}}"> {{$style->style}}</label>
-                    </div>
-                @endforeach
+                
 
                 <h5>Производитель</h5>
 
@@ -58,9 +70,9 @@
             <div class="row">
                 @forelse($products as $product)
                     @foreach($product->colors as $color)
-                        
+                        @foreach($product->types as $type)
                             <div class="col-12 col-md-3">
-                                <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->id }}/@foreach($product->sizes as $size)@if($loop->first){{ $size->id }}@endif{{""}}@endforeach">
+                                <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->id }}/@foreach($product->sizes as $size)@if($loop->first){{ $size->id }}@endif{{""}}@endforeach/{{ $type->id }}">
 
                                     <div class="product-list-page-item-images">
                                         <div class="product-list-page-item-image" style="background-image: url({{$color->color_image}});"></div>
@@ -78,6 +90,7 @@
                                     <span style="display:none;">{{ $product->manufacturer }}</span>
                                 </a>
                             </div>
+                        @endforeach
                         @endforeach
                 @empty
                     <div class="col-12">Пусто &#9785;</div>
@@ -101,6 +114,7 @@
         var color_url = "";
         var size_url = "";
         var style_url = "";
+        var type_url = "";
         var manufacturer_url = "";
         var url = "";
 
@@ -108,6 +122,7 @@
             color_url = "";
             size_url = "";
             style_url = "";
+            type_url = "";
             manufacturer_url = "";
             $(':checkbox[name=color]:checked').each(function() {
                 color_url = color_url + ',' + $(this).val();
@@ -117,6 +132,9 @@
             });
             $(':checkbox[name=style]:checked').each(function() {
                 style_url = style_url + ',' + $(this).val();
+            });
+            $(':checkbox[name=type]:checked').each(function() {
+                type_url = type_url + ',' + $(this).val();
             });
             $(':checkbox[name=manufacturer]:checked').each(function() {
                 manufacturer_url = manufacturer_url + ',' + $(this).val();
@@ -140,13 +158,19 @@
                 style_url_f = style_url;
             }
 
+            if(type_url == '') {
+                type_url_f = '*'
+            } else {
+                type_url_f = type_url;
+            }
+
             if(manufacturer_url == '') {
                 manufacturer_url_f = '*'
             } else {
                 manufacturer_url_f = manufacturer_url;
             }
             
-            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&style=" + style_url_f + "&manufacturer=" + manufacturer_url_f;
+            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&style=" + style_url_f + "&type=" + type_url_f + "&manufacturer=" + manufacturer_url_f;
             $('#form_filter_url').attr('href', url);
         });
     </script>

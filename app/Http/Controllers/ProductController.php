@@ -185,4 +185,10 @@ class ProductController extends Controller
         $type->save();
         return back();
     }
+
+    public function deleteType($id) {
+        $type = Type::find($id);
+        $type->delete();
+        return back();
+    }
 }

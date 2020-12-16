@@ -434,18 +434,21 @@ footer {
 }
 
 .colors-box,
-.sizes-box {
+.sizes-box,
+.types-box {
 	display: inline-block;
 	margin: 0;
 }
 
 .colors-box input[type=radio],
-.sizes-box input[type=radio] {
+.sizes-box input[type=radio],
+.types-box input[type=radio] {
 	display: none;
 }
 
 .colors-box label,
-.sizes-box label {
+.sizes-box label,
+.types-box label {
 	display: inline-block;
 	cursor: pointer;
 	padding: 0px 15px;
@@ -457,17 +460,20 @@ footer {
 }
  
 .colors-box input[type=radio]:checked + label,
-.sizes-box input[type=radio]:checked + label {
+.sizes-box input[type=radio]:checked + label,
+.types-box input[type=radio]:checked + label {
 	border-color: #bea67c;
 }
  
 .colors-box label:hover,
-.sizes-box label:hover {
+.sizes-box label:hover,
+.types-box label:hover {
 	color: #666;
 }
  
 .colors-box input[type=radio]:disabled + label,
-.sizes-box input[type=radio]:disabled + label {
+.sizes-box input[type=radio]:disabled + label,
+.types-box input[type=radio]:disabled + label {
 	background: #efefef;
 	color: #666;
 }
