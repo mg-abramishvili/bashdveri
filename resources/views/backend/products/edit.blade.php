@@ -13,15 +13,31 @@
                 @method('PUT')
                 <input type="hidden" name="id" value="{{$product->id}}">
 
-                <div class="form-group">
-                    <label for="title" class="font-weight-bold">Название</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
-                    @if ($errors->has('title'))
-                        <div class="alert alert-danger">
-                            <!--{{ $errors->first('title') }}-->
-                            Укажите название
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label for="title" class="font-weight-bold">Название</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
+                            @if ($errors->has('title'))
+                                <div class="alert alert-danger">
+                                    <!--{{ $errors->first('title') }}-->
+                                    Укажите название
+                                </div>
+                            @endif
                         </div>
-                    @endif
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="base_price" class="font-weight-bold">Базовая стоимость</label>
+                            <input type="text" class="form-control" id="base_price" name="base_price" placeholder="Базовая стоимость" value="{{ $product->base_price }}">
+                            @if ($errors->has('base_price'))
+                                <div class="alert alert-danger">
+                                    <!--{{ $errors->first('base_price') }}-->
+                                    Укажите базовую стоимость
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">

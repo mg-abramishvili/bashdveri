@@ -68,7 +68,7 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required',
+            'base_price' => 'required',
             'type' => 'required',
             'construct_type' => 'required',
             'manufacturer' => 'required',
@@ -79,7 +79,12 @@ class ProductController extends Controller
         $data = request()->all();
         $products = new Product();
         $products->title = $data['title'];
-        $products->description = $data['description'];
+        $products->base_price = $data['base_price'];
+
+        if (!empty($data['description'])) {
+            $products->description = $data['description'];
+        }
+
         $products->type = $data['type'];
         $products->construct_type = $data['construct_type'];
         $products->manufacturer = $data['manufacturer'];
@@ -93,7 +98,7 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required',
+            'base_price' => 'required',
             'type' => 'required',
             'construct_type' => 'required',
             'manufacturer' => 'required',
@@ -104,7 +109,12 @@ class ProductController extends Controller
         $data = request()->all();
         $products = Product::find($data['id']);
         $products->title = $data['title'];
-        $products->description = $data['description'];
+        $products->base_price = $data['base_price'];
+
+        if (!empty($data['description'])) {
+            $products->description = $data['description'];
+        }
+
         $products->type = $data['type'];
         $products->construct_type = $data['construct_type'];
         $products->manufacturer = $data['manufacturer'];
@@ -117,7 +127,11 @@ class ProductController extends Controller
     public function addColor(Request $request) {
         $data = request()->all();
         $products = Product::find($data['id']);
-        $color = new Color(['color' => $data['color'], 'color_price' => $data['color_price'], 'color_image' => $data['color_image']]);
+        $color = new Color([
+            'color' => $data['color'],
+            'color_price' => $data['color_price'],
+            'color_image' => $data['color_image']
+        ]);
 
         $products->colors()->save($color);
         return back();
@@ -136,7 +150,10 @@ class ProductController extends Controller
     public function addSize(Request $request) {
         $data = request()->all();
         $products = Product::find($data['id']);
-        $size = new Size(['size' => $data['size'], 'size_price' => $data['size_price']]);
+        $size = new Size([
+            'size' => $data['size'],
+            'size_price' => $data['size_price']
+        ]);
 
         $products->sizes()->save($size);
         return back();
