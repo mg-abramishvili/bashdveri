@@ -9,7 +9,7 @@
                 @foreach($products_colors as $p_colors)
                     @foreach($p_colors->colors as $color)
                         <div class="form-group">
-                            <input type="checkbox" id="{{$color->color}}" name="color" value="{{$color->color}}">
+                            <input type="checkbox" id="{{$color->color}}" name="color" value="{{$color->color}}" @foreach($filtercolor as $fc) @if($color->color == $fc) checked @endif @endforeach>
                             <label for="{{$color->color}}"> {{$color->color}}</label>
                         </div>
                     @endforeach
@@ -21,18 +21,27 @@
                 @foreach($products_sizes as $p_sizes)
                     @foreach($p_sizes->sizes as $size)
                         <div class="form-group">
-                            <input type="checkbox" id="{{$size->size}}" name="size" value="{{$size->size}}">
+                            <input type="checkbox" id="{{$size->size}}" name="size" value="{{$size->size}}" @foreach($filtersize as $fs) @if($size->size == $fs) checked @endif @endforeach>
                             <label for="{{$size->size}}"> {{$size->size}}</label>
                         </div>
                     @endforeach
                 @endforeach
                 -->
 
+                <h5>Стиль</h5>
+
+                @foreach($products_styles as $style)
+                    <div class="form-group">
+                        <input type="checkbox" id="{{$style->style}}" name="style" value="{{$style->style}}" @foreach($filterstyle as $fstyle) @if($style->style == $fstyle) checked @endif @endforeach>
+                        <label for="{{$style->style}}"> {{$style->style}}</label>
+                    </div>
+                @endforeach
+
                 <h5>Производитель</h5>
 
                 @foreach($products_manufacturers as $manufacturer)
                     <div class="form-group">
-                        <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}">
+                        <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}" @foreach($filtermanufacturer as $fm) @if($manufacturer->manufacturer == $fm) checked @endif @endforeach>
                         <label for="{{$manufacturer->manufacturer}}"> {{$manufacturer->manufacturer}}</label>
                     </div>
                 @endforeach
@@ -91,6 +100,7 @@
     <script>
         var color_url = "";
         var size_url = "";
+        var style_url = "";
         var manufacturer_url = "";
         var url = "";
 
@@ -106,6 +116,9 @@
             $(':checkbox[name=manufacturer]:checked').each(function() {
                 manufacturer_url = manufacturer_url + ',' + $(this).val();
             });
+            $(':checkbox[name=style]:checked').each(function() {
+                style_url = style_url + ',' + $(this).val();
+            });
 
             if(color_url == '') {
                 color_url_f = '*'
@@ -119,13 +132,19 @@
                 size_url_f = size_url;
             }
 
+            if(style_url == '') {
+                style_url_f = '*'
+            } else {
+                style_url_f = style_url;
+            }
+
             if(manufacturer_url == '') {
                 manufacturer_url_f = '*'
             } else {
                 manufacturer_url_f = manufacturer_url;
             }
             
-            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&manufacturer=" + manufacturer_url_f;
+            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&style=" + style_url_f + "&manufacturer=" + manufacturer_url_f;
             $('#form_filter_url').attr('href', url);
         });
     </script>

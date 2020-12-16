@@ -29,6 +29,15 @@
                 @endforeach
                 -->
 
+                <h5>Стиль</h5>
+
+                @foreach($products_styles as $style)
+                    <div class="form-group">
+                        <input type="checkbox" id="{{$style->style}}" name="style" value="{{$style->style}}">
+                        <label for="{{$style->style}}"> {{$style->style}}</label>
+                    </div>
+                @endforeach
+
                 <h5>Производитель</h5>
 
                 @foreach($products_manufacturers as $manufacturer)
@@ -96,6 +105,7 @@
     <script>
         var color_url = "";
         var size_url = "";
+        var style_url = "";
         var manufacturer_url = "";
         var url = "";
 
@@ -107,6 +117,9 @@
             });
             $(':checkbox[name=size]:checked').each(function() {
                 size_url = size_url + ',' + $(this).val();
+            });
+            $(':checkbox[name=style]:checked').each(function() {
+                style_url = style_url + ',' + $(this).val();
             });
             $(':checkbox[name=manufacturer]:checked').each(function() {
                 manufacturer_url = manufacturer_url + ',' + $(this).val();
@@ -124,13 +137,19 @@
                 size_url_f = size_url;
             }
 
+            if(style_url == '') {
+                style_url_f = '*'
+            } else {
+                style_url_f = style_url;
+            }
+
             if(manufacturer_url == '') {
                 manufacturer_url_f = '*'
             } else {
                 manufacturer_url_f = manufacturer_url;
             }
             
-            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&manufacturer=" + manufacturer_url_f;
+            url = "/filter/color=" + color_url_f + "&size=" + size_url_f + "&style=" + style_url_f + "&manufacturer=" + manufacturer_url_f;
             $('#form_filter_url').attr('href', url);
         });
     </script>

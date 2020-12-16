@@ -35,7 +35,7 @@ Route::post('/backend/update-type/{type}', 'App\Http\Controllers\ProductControll
 // PRODUCTS (FRONTEND)
 Route::get('/products','App\Http\Controllers\FrontProductController@index');
 Route::get('/products/{id}/{productcolor}/{productsize}','App\Http\Controllers\FrontProductController@show');
-Route::get('/filter/color={filtercolor}&size={filtersize}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
+Route::get('/filter/color={filtercolor}&size={filtersize}&style={filterstyle}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
 
 // CART
 Route::get('/add-to-cart/{product}','App\Http\Controllers\CartController@add')->name('cart.add');
