@@ -14,9 +14,10 @@ class FrontProductController extends Controller
     {
         //$products = Product::with('colors')->get();
         //$products = Color::with('products')->where('color', 'Красный1')->get();
-        $prod_all = Product::all();
-        $products_all = $prod_all->unique('colors.color');
-        $products_all->all();
+
+        $products_all = Product::with(['colors' => function($query){
+            $query->groupBy('color');
+        }])->get();
 
         $products = Product::with('colors', 'sizes')->get();
 
@@ -25,9 +26,9 @@ class FrontProductController extends Controller
 
     public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
-        $prod_all = Product::all();
-        $products_all = $prod_all->unique('colors.color');
-        $products_all->all();
+        $products_all = Product::with(['colors' => function($query){
+            $query->groupBy('color');
+        }])->get();
 
         $filtercolor = explode(',', $filtercolor);
         $filtersize = explode(',', $filtersize);
