@@ -14,14 +14,20 @@ class FrontProductController extends Controller
     {
         //$products = Product::with('colors')->get();
         //$products = Color::with('products')->where('color', 'Красный1')->get();
-        $products_all = Product::all();
+        $prod_all = Product::all();
+        $products_all = $prod_all->unique('colors.color');
+        $products_all->all();
+
         $products = Product::with('colors', 'sizes')->get();
+
         return view('frontend.products.index', compact('products', 'products_all'));
     }
 
     public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
-        $products_all = Product::all();
+        $prod_all = Product::all();
+        $products_all = $prod_all->unique('colors.color');
+        $products_all->all();
 
         $filtercolor = explode(',', $filtercolor);
         $filtersize = explode(',', $filtersize);
