@@ -95,8 +95,7 @@ class FrontProductController extends Controller
                     }
                 }
             ])
-            ->where('style', 'manufacturer')
-            ->orWhere(function ($query) use ($filterstyle) {
+            ->where(function ($query) use ($filterstyle) {
                 if ($filterstyle[0] !== '*') {
                     $query->where('style');
                     foreach ($filterstyle as $fstyle) {
@@ -104,7 +103,7 @@ class FrontProductController extends Controller
                     }
                 }
             })
-            ->orWhere(function ($query) use ($filtermanufacturer) {
+            ->where(function ($query) use ($filtermanufacturer) {
                 if ($filtermanufacturer[0] !== '*') {
                     $query->where('manufacturer');
                     foreach ($filtermanufacturer as $fmanufacturer) {
