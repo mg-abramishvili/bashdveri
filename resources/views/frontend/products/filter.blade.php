@@ -47,7 +47,7 @@
             <div class="row">
                 @forelse($products as $product)
                     @foreach($product->colors as $color)
-                        @foreach($product->sizes as $size)
+                        
                             <div class="col-12 col-md-3">
                                 <a class="product-list-page-item" href="/products/{{$product->id}}/{{ $color->id }}/{{ $size->id }}">
 
@@ -66,13 +66,12 @@
                                     <h3 class="mt-1 mb-2">{{$product->title}}</h3>
 
                                     <span style=>{{ $color->color }}</span>
-                                    <span>{{ $size->size }}</span>
+                                    
 
                                     <span style="display:none;">{{ $product->manufacturer }}</span>
                                 </a>
                             </div>
                         @endforeach
-                    @endforeach
                 @empty
                     <div class="col-12">Пусто &#9785;</div>
                 @endforelse
