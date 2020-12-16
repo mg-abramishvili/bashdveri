@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-group">
-                <label for="style" class="font-weight-bold">Подкатегория</label>
+                    <label for="style" class="font-weight-bold">Подкатегория</label>
                     <select id="style" name="style" class="form-control">
                         <option value="{{ $product->style }}">{{ $product->style }}</option>
                         <option value="Современный">Современный</option>
