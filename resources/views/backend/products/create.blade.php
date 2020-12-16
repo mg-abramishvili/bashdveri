@@ -10,8 +10,9 @@
 
         <form action="/backend/products" method="post" enctype="multipart/form-data">@csrf
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="form-group">
+                        <label for="title" class="font-weight-bold">Название</label>
                         <input type="text" class="form-control" name="title" placeholder="Название">
                         @if ($errors->has('title'))
                             <div class="alert alert-danger">
@@ -21,8 +22,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group">
+                        <label for="base_price" class="font-weight-bold">Базовая стоимость</label>
                         <input type="text" class="form-control" name="base_price" placeholder="Базовая стоимость">
                         @if ($errors->has('base_price'))
                             <div class="alert alert-danger">
@@ -34,36 +36,20 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="style" class="font-weight-bold">Подкатегория</label>
-                <select id="style" name="style" class="form-control">
-                    <option value="Современный">Современный</option>
-                    <option value="Классика">Классика</option>
-                    <option value="Неоклассика">Неоклассика</option>
-                    <option value="Ультра">Ультра</option>
-                </select>
-                @if ($errors->has('style'))
-                    <div class="alert alert-danger">
-                        <!--{{ $errors->first('style') }}-->
-                        Укажите подкатегорию
-                    </div>
-                @endif
-            </div>
-
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="type" class="font-weight-bold">Тип двери</label>
-                        <select id="type" name="type" class="form-control">
-                            <option value="глухая">глухая</option>
-                            <option value="остекленная">остекленная</option>
-                            <option value="зеркало">зеркало</option>
-                            <option value="молдинг">молдинг</option>
+                        <label for="style" class="font-weight-bold">Подкатегория</label>
+                        <select id="style" name="style" class="form-control">
+                            <option value="Современный">Современный</option>
+                            <option value="Классика">Классика</option>
+                            <option value="Неоклассика">Неоклассика</option>
+                            <option value="Ультра">Ультра</option>
                         </select>
-                        @if ($errors->has('type'))
+                        @if ($errors->has('style'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('type') }}-->
-                                Укажите тип двери
+                                <!--{{ $errors->first('style') }}-->
+                                Укажите подкатегорию
                             </div>
                         @endif
                     </div>

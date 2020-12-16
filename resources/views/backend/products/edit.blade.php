@@ -14,7 +14,7 @@
                 <input type="hidden" name="id" value="{{$product->id}}">
 
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Название</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
@@ -26,7 +26,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="base_price" class="font-weight-bold">Базовая стоимость</label>
                             <input type="text" class="form-control" id="base_price" name="base_price" placeholder="Базовая стоимость" value="{{ $product->base_price }}">
@@ -40,63 +40,35 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="style" class="font-weight-bold">Подкатегория</label>
-                    <select id="style" name="style" class="form-control">
-                        <option value="{{ $product->style }}">{{ $product->style }}</option>
-                        <option value="Современный">Современный</option>
-                        <option value="Классика">Классика</option>
-                        <option value="Неоклассика">Неоклассика</option>
-                        <option value="Ультра">Ультра</option>
-                    </select>
-                    <script>
-                        var optionValues =[];
-                        $('#style option').each(function(){
-                        if($.inArray(this.value, optionValues) >-1){
-                            $(this).remove()
-                        }else{
-                            optionValues.push(this.value);
-                        }
-                        });
-                    </script>
-
-                    @if ($errors->has('style'))
-                        <div class="alert alert-danger">
-                            <!--{{ $errors->first('style') }}-->
-                            Укажите подкатегорию
-                        </div>
-                    @endif
-                </div>
-
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label for="type" class="font-weight-bold">Тип двери</label>
-                            <select id="type" name="type" class="form-control">
-                                <option value="{{ $product->type }}">{{ $product->type }}</option>
-                                <option value="глухая">глухая</option>
-                                <option value="остекленная">остекленная</option>
-                                <option value="зеркало">зеркало</option>
-                                <option value="молдинг">молдинг</option>
-                            </select>
-                            <script>
-                                var optionValues =[];
-                                $('#type option').each(function(){
-                                if($.inArray(this.value, optionValues) >-1){
-                                    $(this).remove()
-                                }else{
-                                    optionValues.push(this.value);
-                                }
-                                });
-                            </script>
+                        <label for="style" class="font-weight-bold">Подкатегория</label>
+                        <select id="style" name="style" class="form-control">
+                            <option value="{{ $product->style }}">{{ $product->style }}</option>
+                            <option value="Современный">Современный</option>
+                            <option value="Классика">Классика</option>
+                            <option value="Неоклассика">Неоклассика</option>
+                            <option value="Ультра">Ультра</option>
+                        </select>
+                        <script>
+                            var optionValues =[];
+                            $('#style option').each(function(){
+                            if($.inArray(this.value, optionValues) >-1){
+                                $(this).remove()
+                            }else{
+                                optionValues.push(this.value);
+                            }
+                            });
+                        </script>
 
-                            @if ($errors->has('type'))
-                                <div class="alert alert-danger">
-                                    <!--{{ $errors->first('type') }}-->
-                                    Укажите тип двери
-                                </div>
-                            @endif
-                        </div>
+                        @if ($errors->has('style'))
+                            <div class="alert alert-danger">
+                                <!--{{ $errors->first('style') }}-->
+                                Укажите подкатегорию
+                            </div>
+                        @endif
+                    </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
@@ -345,7 +317,7 @@
                 </div>
             </div>
 
-            <div class="box mt-4 mb-4">
+            <div class="box mt-4">
             <div class="row align-items-center mb-4">
                 <div class="col-6">
                     <h3 class="m-0">Размеры</h3>
@@ -386,6 +358,74 @@
                                 <input type="text" name="size" class="form-control mb-3">
                                 <input type="text" name="size_price" class="form-control mb-3">
                                 <button type="submit" class="btn btn-lg btn-success">Добавить размер</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box mt-4 mb-4">
+            <div class="row align-items-center mb-4">
+                <div class="col-6">
+                    <h3 class="m-0">Типы двери</h3>
+                </div>
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-type">Добавить тип</button>
+                </div>
+            </div>
+
+            @foreach($product->types as $type)
+            <form action="{{ route('type.update', $type->id) }}" method="post" enctype="multipart/form-data" class="mb-3">@csrf
+                <input type="hidden" name="id" value="{{$type->id}}">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <select id="type" name="type" class="form-control">
+                            <option value="{{ $type->type }}">{{ $type->type }}</option>
+                            <option value="глухая">глухая</option>
+                            <option value="остекленная">остекленная</option>
+                            <option value="зеркало">зеркало</option>
+                            <option value="молдинг">молдинг</option>
+                        </select>
+                        <script>
+                            var optionValues =[];
+                            $('#type option').each(function(){
+                            if($.inArray(this.value, optionValues) >-1){
+                                $(this).remove()
+                            }else{
+                                optionValues.push(this.value);
+                            }
+                            });
+                        </script>
+                    </div>
+                    <div class="col-3">
+                        <input type="text" name="type_price" value="{{ $type->type_price }}" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
+                    </div>
+                </div>
+            </form>           
+            @endforeach
+            </div>
+
+            <div class="modal" id="modal-type">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Добавить тип</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('type.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
+                                <input type="hidden" name="id" value="{{$product->id}}">
+                                <select id="type" name="type" class="form-control">
+                                    <option value="глухая">глухая</option>
+                                    <option value="остекленная">остекленная</option>
+                                    <option value="зеркало">зеркало</option>
+                                    <option value="молдинг">молдинг</option>
+                                </select>
+                                <input type="text" name="type_price" class="form-control mb-3">
+                                <button type="submit" class="btn btn-lg btn-success">Добавить тип</button>
                             </form>
                         </div>
                     </div>

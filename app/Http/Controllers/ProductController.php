@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -165,6 +166,27 @@ class ProductController extends Controller
         $size->size = $data['size'];
         $size->size_price = $data['size_price'];
         $size->save();
+        return back();
+    }
+
+    public function addType(Request $request) {
+        $data = request()->all();
+        $products = Product::find($data['id']);
+        $type = new Type([
+            'type' => $data['type'],
+            'type_price' => $data['type_price']
+        ]);
+
+        $products->types()->save($type);
+        return back();
+    }
+
+    public function updateType(Request $request) {
+        $data = request()->all();
+        $type = Type::find($data['id']);
+        $type->type = $data['type'];
+        $type->type_price = $data['type_price'];
+        $type->save();
         return back();
     }
 }

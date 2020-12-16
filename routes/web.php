@@ -28,6 +28,9 @@ Route::post('/backend/add-color/file/{method}','App\Http\Controllers\ProductCont
 Route::post('/backend/add-size/{product}', 'App\Http\Controllers\ProductController@addSize')->name('size.add')->middleware('auth');
 Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductController@updateSize')->name('size.update')->middleware('auth');
 
+// TYPES (BACKEND)
+Route::post('/backend/add-type/{product}', 'App\Http\Controllers\ProductController@addType')->name('type.add')->middleware('auth');
+Route::post('/backend/update-type/{type}', 'App\Http\Controllers\ProductController@updateType')->name('type.update')->middleware('auth');
 
 // PRODUCTS (FRONTEND)
 Route::get('/products','App\Http\Controllers\FrontProductController@index');

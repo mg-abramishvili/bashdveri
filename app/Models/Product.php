@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Size');
     }
+
+    public function types()
+    {
+        return $this->belongsToMany('App\Models\Type');
+    }
 }
