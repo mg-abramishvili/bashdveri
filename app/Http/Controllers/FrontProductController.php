@@ -12,23 +12,52 @@ class FrontProductController extends Controller
 {
     public function index()
     {
-        //$products = Product::with('colors')->get();
-        //$products = Color::with('products')->where('color', 'Красный1')->get();
+        $products_colors = Product::with([
+            'colors' => function($query){
+                $query->groupBy('color');
+            }
+        ])
+        ->get();
 
-        $products_all = Product::with(['colors' => function($query){
-            $query->groupBy('color');
-        }])->get();
+        $products_sizes = Product::with([
+            'sizes' => function($query){
+                $query->groupBy('size');
+            }
+        ])
+        ->get();
+
+        $products_manufacturers = Product::all();
+        $products_manufacturers = $products_manufacturers->unique(function ($item) {
+            return $item['manufacturer'];
+        });
+        $products_manufacturers->values()->all();
 
         $products = Product::with('colors', 'sizes')->get();
 
-        return view('frontend.products.index', compact('products', 'products_all'));
+        return view('frontend.products.index', compact('products', 'products_colors', 'products_sizes', 'products_manufacturers'));
     }
 
     public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
-        $products_all = Product::with(['colors' => function($query){
-            $query->groupBy('color');
-        }])->get();
+        $products_colors = Product::with([
+            'colors' => function($query){
+                $query->groupBy('color');
+            }
+        ])
+        ->get();
+
+        $products_sizes = Product::with([
+            'sizes' => function($query){
+                $query->groupBy('size');
+            }
+        ])
+        ->get();
+
+        $products_manufacturers = Product::all();
+        $products_manufacturers = $products_manufacturers->unique(function ($item) {
+            return $item['manufacturer'];
+        });
+        $products_manufacturers->values()->all();
 
         $filtercolor = explode(',', $filtercolor);
         $filtersize = explode(',', $filtersize);
@@ -63,7 +92,7 @@ class FrontProductController extends Controller
             })
             ->get();
 
-        return view('frontend.products.filter', compact('products', 'products_all', 'filtercolor', 'filtersize', 'filtermanufacturer'));
+        return view('frontend.products.filter', compact('products', 'products_colors', 'products_sizes', 'products_manufacturers', 'filtercolor', 'filtersize', 'filtermanufacturer'));
     }
 
     public function show($id, $productcolor, $productsize)

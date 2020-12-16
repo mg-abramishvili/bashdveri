@@ -70,7 +70,6 @@ class ProductController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'base_price' => 'required',
-            'type' => 'required',
             'construct_type' => 'required',
             'manufacturer' => 'required',
             'surface' => 'required',
@@ -86,7 +85,6 @@ class ProductController extends Controller
             $products->description = $data['description'];
         }
 
-        $products->type = $data['type'];
         $products->construct_type = $data['construct_type'];
         $products->manufacturer = $data['manufacturer'];
         $products->surface = $data['surface'];
@@ -100,7 +98,6 @@ class ProductController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'base_price' => 'required',
-            'type' => 'required',
             'construct_type' => 'required',
             'manufacturer' => 'required',
             'surface' => 'required',
@@ -116,7 +113,6 @@ class ProductController extends Controller
             $products->description = $data['description'];
         }
 
-        $products->type = $data['type'];
         $products->construct_type = $data['construct_type'];
         $products->manufacturer = $data['manufacturer'];
         $products->surface = $data['surface'];

@@ -5,11 +5,11 @@
         <div class="col-12 col-md-3">
             <div class="filter">
 
-                <h5>Цвет</h5>
-                @foreach($products_all as $product_colors)
-                    @foreach($product_colors->colors as $color)
+            <h5>Цвет</h5>
+                @foreach($products_colors as $p_colors)
+                    @foreach($p_colors->colors as $color)
                         <div class="form-group">
-                            <input type="checkbox" id="{{$color->color}}" name="color" value="{{$color->color}}" @foreach($filtercolor as $fc) @if($color->color == $fc) checked @endif @endforeach>
+                            <input type="checkbox" id="{{$color->color}}" name="color" value="{{$color->color}}">
                             <label for="{{$color->color}}"> {{$color->color}}</label>
                         </div>
                     @endforeach
@@ -18,10 +18,10 @@
                 <!--
                 <h5>Размер</h5>
 
-                @foreach($products_all as $product_sizes)
-                    @foreach($product_sizes->sizes as $size)
+                @foreach($products_sizes as $p_sizes)
+                    @foreach($p_sizes->sizes as $size)
                         <div class="form-group">
-                            <input type="checkbox" id="{{$size->size}}" name="size" value="{{$size->size}}" @foreach($filtersize as $fs) @if($size->size == $fs) checked @endif @endforeach>
+                            <input type="checkbox" id="{{$size->size}}" name="size" value="{{$size->size}}">
                             <label for="{{$size->size}}"> {{$size->size}}</label>
                         </div>
                     @endforeach
@@ -30,11 +30,11 @@
 
                 <h5>Производитель</h5>
 
-                @foreach($products_all as $manufacturer)
-                        <div class="form-group">
-                            <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}" @foreach($filtermanufacturer as $fm) @if($manufacturer->manufacturer == $fm) checked @endif @endforeach>
-                            <label for="{{$manufacturer->manufacturer}}"> {{$manufacturer->manufacturer}}</label>
-                        </div>
+                @foreach($products_manufacturers as $manufacturer)
+                    <div class="form-group">
+                        <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}">
+                        <label for="{{$manufacturer->manufacturer}}"> {{$manufacturer->manufacturer}}</label>
+                    </div>
                 @endforeach
 
                 <a id="form_filter_url" href="" class="btn-standard">Применить</a>

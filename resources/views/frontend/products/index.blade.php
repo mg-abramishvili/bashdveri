@@ -7,8 +7,8 @@
             <div class="filter">
 
                 <h5>Цвет</h5>
-                @foreach($products_all as $product_colors)
-                    @foreach($product_colors->colors as $color)
+                @foreach($products_colors as $p_colors)
+                    @foreach($p_colors->colors as $color)
                         <div class="form-group">
                             <input type="checkbox" id="{{$color->color}}" name="color" value="{{$color->color}}">
                             <label for="{{$color->color}}"> {{$color->color}}</label>
@@ -19,8 +19,8 @@
                 <!--
                 <h5>Размер</h5>
 
-                @foreach($products_all as $product_sizes)
-                    @foreach($product_sizes->sizes as $size)
+                @foreach($products_sizes as $p_sizes)
+                    @foreach($p_sizes->sizes as $size)
                         <div class="form-group">
                             <input type="checkbox" id="{{$size->size}}" name="size" value="{{$size->size}}">
                             <label for="{{$size->size}}"> {{$size->size}}</label>
@@ -31,7 +31,7 @@
 
                 <h5>Производитель</h5>
 
-                @foreach($products_all as $manufacturer)
+                @foreach($products_manufacturers as $manufacturer)
                     <div class="form-group">
                         <input type="checkbox" id="{{$manufacturer->manufacturer}}" name="manufacturer" value="{{$manufacturer->manufacturer}}">
                         <label for="{{$manufacturer->manufacturer}}"> {{$manufacturer->manufacturer}}</label>
