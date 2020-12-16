@@ -27,7 +27,7 @@ class FrontProductController extends Controller
     public function filterColor(Request $request, $filtercolor, $filtersize, $filtermanufacturer)
     {
         $products_all = Product::with(['colors' => function($query){
-            $query->select('color')->groupBy('color')->get();
+            $query->select('color')->groupBy('color')->orderBy('color_id', 'DESC')->get();
         }])->get();
 
         $filtercolor = explode(',', $filtercolor);
