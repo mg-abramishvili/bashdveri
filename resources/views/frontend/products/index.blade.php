@@ -16,6 +16,7 @@
                     @endforeach
                 @endforeach
 
+                <!--
                 <h5>Размер</h5>
 
                 @foreach($products_all as $product_sizes)
@@ -26,6 +27,7 @@
                         </div>
                     @endforeach
                 @endforeach
+                -->
 
                 <h5>Производитель</h5>
 
@@ -67,30 +69,11 @@
                                     @endif
                                 @endforeach
 
-                                <p class="price_t mb-0"></p>
+                                <p class="price_t mb-0">от {{ $product->base_price }} ₽</p>
                             </div>
-
-                            <script>
-                                var ids = $(".product-list-page-item-prices .{{ $product->id }}").map(function() {
-                                    return $(this).text();
-                                }).get();
-                                var highest = Math.min.apply( Math, ids );
-                                $('.price_t').html('от '+ highest + ' ₽');
-                            </script>
                             
                             <h3 class="mt-2 mb-0">{{$product->title}}</h3>
-                            
-                            <!--<div class="product-list-page-item-colors" style="display:none;">
-                                @foreach($product->colors as $color)
-                                    <span>{{ $color->color }}</span>
-                                @endforeach
-                            </div>
 
-                            <div class="product-list-page-item-sizes" style="display:none;">
-                                @foreach($product->sizes as $size)
-                                    <span>{{ $size->size }}</span>
-                                @endforeach
-                            </div>-->
                         </a>
                     </div>
                 @endforeach

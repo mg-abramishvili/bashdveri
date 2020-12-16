@@ -15,6 +15,7 @@
                     @endforeach
                 @endforeach
 
+                <!--
                 <h5>Размер</h5>
 
                 @foreach($products_all as $product_sizes)
@@ -25,6 +26,7 @@
                         </div>
                     @endforeach
                 @endforeach
+                -->
 
                 <h5>Производитель</h5>
 
@@ -56,11 +58,7 @@
                                     </div>
 
                                     <div class="product-list-page-item-prices">
-                                        @if($color->color_price > $size->size_price)
-                                            <p class="price m-0">{{ $color->color_price }} ₽</p>
-                                        @else
-                                            <p class="price m-0">{{ $size->size_price }} ₽</p>
-                                        @endif
+                                        <p class="price m-0">от {{ $product->base_price }} ₽</p>
                                     </div>
 
                                     <h3 class="mt-1 mb-2">{{$product->title}}</h3>

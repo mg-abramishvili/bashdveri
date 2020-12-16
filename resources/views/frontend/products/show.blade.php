@@ -70,14 +70,22 @@
 
     <script>
         $( document ).ready(function() {
-            var color_price = parseInt($('input[name=color]:checked', '#myForm').attr("data-price"));
+            if(isNaN(parseInt($('input[name=color]:checked', '#myForm').attr("data-price")))) {
+                var color_price = '{{ $product->base_price }}';
+            } else {
+                var color_price = parseInt($('input[name=color]:checked', '#myForm').attr("data-price"));
+            }
             var color = $('input[name=color]:checked', '#myForm').val();
 
-            var size_price = parseInt($('input[name=size]:checked', '#myForm').attr("data-price"));
+            if(isNaN(parseInt($('input[name=size]:checked', '#myForm').attr("data-price")))) {
+                var size_price = '{{ $product->base_price }}';
+            } else {
+                var size_price = parseInt($('input[name=size]:checked', '#myForm').attr("data-price"));
+            }
             var size = $('input[name=size]:checked', '#myForm').val();
 
             var price_max = Math.max(color_price, size_price);
-
+            
             $('.price').html(price_max + ' ₽');
 
             $('#out').html('{{ $product->title }} Цвет: '+ color +' Цена: '+ price_max +'руб.');
@@ -86,11 +94,20 @@
         });
 
         $('#myForm input').on('change', function() {
-            var color_price = parseInt($('input[name=color]:checked', '#myForm').attr("data-price"));
+            if(isNaN(parseInt($('input[name=color]:checked', '#myForm').attr("data-price")))) {
+                var color_price = '{{ $product->base_price }}';
+            } else {
+                var color_price = parseInt($('input[name=color]:checked', '#myForm').attr("data-price"));
+            }
             var color_slider_selector = $('input[name=color]:checked', '#myForm').attr("data-selector");
             var color = $('input[name=color]:checked', '#myForm').val();
 
-            var size_price = parseInt($('input[name=size]:checked', '#myForm').attr("data-price"));
+            if(isNaN(parseInt($('input[name=size]:checked', '#myForm').attr("data-price")))) {
+                var size_price = '{{ $product->base_price }}';
+            } else {
+                var size_price = parseInt($('input[name=size]:checked', '#myForm').attr("data-price"));
+            }
+            
             var size = $('input[name=size]:checked', '#myForm').val();
 
             var price_max = Math.max(color_price, size_price);
