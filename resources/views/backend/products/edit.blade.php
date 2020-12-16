@@ -42,7 +42,24 @@
 
                 <div class="form-group">
                 <label for="style" class="font-weight-bold">Подкатегория</label>
-                    <input type="text" class="form-control" id="style" name="style" placeholder="Подкатегория" value="{{ $product->style }}">
+                    <select id="style" name="style" class="form-control">
+                        <option value="{{ $product->style }}">{{ $product->style }}</option>
+                        <option value="Современный">Современный</option>
+                        <option value="Классика">Классика</option>
+                        <option value="Неоклассика">Неоклассика</option>
+                        <option value="Ультра">Ультра</option>
+                    </select>
+                    <script>
+                        var optionValues =[];
+                        $('#style option').each(function(){
+                        if($.inArray(this.value, optionValues) >-1){
+                            $(this).remove()
+                        }else{
+                            optionValues.push(this.value);
+                        }
+                        });
+                    </script>
+
                     @if ($errors->has('style'))
                         <div class="alert alert-danger">
                             <!--{{ $errors->first('style') }}-->
@@ -55,7 +72,24 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="type" class="font-weight-bold">Тип двери</label>
-                            <input type="text" class="form-control" id="type" name="type" placeholder="Тип двери" value="{{ $product->type }}">
+                            <select id="type" name="type" class="form-control">
+                                <option value="{{ $product->type }}">{{ $product->type }}</option>
+                                <option value="глухая">глухая</option>
+                                <option value="остекленная">остекленная</option>
+                                <option value="зеркало">зеркало</option>
+                                <option value="молдинг">молдинг</option>
+                            </select>
+                            <script>
+                                var optionValues =[];
+                                $('#type option').each(function(){
+                                if($.inArray(this.value, optionValues) >-1){
+                                    $(this).remove()
+                                }else{
+                                    optionValues.push(this.value);
+                                }
+                                });
+                            </script>
+
                             @if ($errors->has('type'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('type') }}-->
@@ -67,7 +101,23 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                         <label for="construct_type" class="font-weight-bold">Конструкция</label>
-                            <input type="text" class="form-control" id="construct_type" name="construct_type" placeholder="Конструкция" value="{{ $product->construct_type }}">
+                            <select id="construct_type" name="construct_type" class="form-control">
+                                <option value="{{ $product->construct_type }}">{{ $product->construct_type }}</option>
+                                <option value="царговая">царговая</option>
+                                <option value="щитовая">щитовая</option>
+                                <option value="массив">массив</option>
+                            </select>
+                            <script>
+                                var optionValues =[];
+                                $('#construct_type option').each(function(){
+                                if($.inArray(this.value, optionValues) >-1){
+                                    $(this).remove()
+                                }else{
+                                    optionValues.push(this.value);
+                                }
+                                });
+                            </script>
+                            
                             @if ($errors->has('construct_type'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('construct_type') }}-->
@@ -79,7 +129,27 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="surface" class="font-weight-bold">Покрытие</label>
-                            <input type="text" class="form-control" id="surface" name="surface" placeholder="Поверхность" value="{{ $product->surface }}">
+                            <select id="surface" name="surface" class="form-control">
+                                <option value="{{ $product->surface }}">{{ $product->surface }}</option>
+                                <option value="ламинированная">ламинированная</option>
+                                <option value="пвх">пвх</option>
+                                <option value="экошпон">экошпон</option>
+                                <option value="экокрафт">экокрафт</option>
+                                <option value="эмаль">эмаль</option>
+                                <option value="шпон">шпон</option>
+                                <option value="массив">массив</option>
+                            </select>
+                            <script>
+                                var optionValues =[];
+                                $('#surface option').each(function(){
+                                if($.inArray(this.value, optionValues) >-1){
+                                    $(this).remove()
+                                }else{
+                                    optionValues.push(this.value);
+                                }
+                                });
+                            </script>
+
                             @if ($errors->has('surface'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('surface') }}-->
@@ -91,7 +161,31 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="manufacturer" class="font-weight-bold">Производитель</label>
-                            <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="Производитель" value="{{ $product->manufacturer }}">
+                            <select id="manufacturer" name="manufacturer" class="form-control">
+                                <option value="{{ $product->manufacturer }}">{{ $product->manufacturer }}</option>
+                                <option value="VFD">VFD</option>
+                                <option value="ВДК">ВДК</option>
+                                <option value="Optima Porte">Optima Porte</option>
+                                <option value="ДверЛайн">ДверЛайн</option>
+                                <option value="Лорд">Лорд</option>
+                                <option value="Терри">Терри</option>
+                                <option value="Ферони">Ферони</option>
+                                <option value="Аргус">Аргус</option>
+                                <option value="Тайгер">Тайгер</option>
+                                <option value="Агат">Агат</option>
+                                <option value="Меги">Меги</option>
+                            </select>
+                            <script>
+                                var optionValues =[];
+                                $('#manufacturer option').each(function(){
+                                if($.inArray(this.value, optionValues) >-1){
+                                    $(this).remove()
+                                }else{
+                                    optionValues.push(this.value);
+                                }
+                                });
+                            </script>
+                            
                             @if ($errors->has('manufacturer'))
                                 <div class="alert alert-danger">
                                     <!--{{ $errors->first('manufacturer') }}-->
