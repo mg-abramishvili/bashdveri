@@ -98,6 +98,17 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="type" class="font-weight-bold">Тип</label>
+                            <select id="type" name="type" class="form-control">
+                                <option disabled selected>Выберите</option>
+                                @foreach($types as $type)
+                                    <option value="{{ $type->id }}" @foreach($product->types as $t) @if($type->id == $t->id)selected="selected"@endif @endforeach>{{ $type->type }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="surface" class="font-weight-bold">Покрытие</label>
@@ -178,6 +189,14 @@
                             Укажите описание
                         </div>
                     @endif
+                </div>
+
+                <div class="form-group">
+                    <select name="othertypes[]" class="custom-select" multiple>
+                        @foreach($products as $pd)
+                            <option value="{{$pd->id}}" @foreach($product->othertypes as $ot) @if($pd->id == $ot->id)selected="selected"@endif @endforeach>{{$pd->title}} @foreach($pd->types as $pdt) {{ $pdt->type }} @endforeach</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-success">Сохранить</button>
@@ -358,64 +377,6 @@
                                 <input type="text" name="size" class="form-control mb-3">
                                 <input type="text" name="size_price" class="form-control mb-3">
                                 <button type="submit" class="btn btn-lg btn-success">Добавить размер</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box mt-4 mb-4">
-            <div class="row align-items-center mb-4">
-                <div class="col-6">
-                    <h3 class="m-0">Типы двери</h3>
-                </div>
-                <div class="col-6 text-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-type">Добавить тип</button>
-                </div>
-            </div>
-
-            @foreach($product->types as $type)
-            <form action="{{ route('type.update', $type->id) }}" method="post" enctype="multipart/form-data" class="mb-3">@csrf
-                <input type="hidden" name="id" value="{{$type->id}}">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <select id="type" name="type" class="form-control" style="display:none;">
-                            <option value="{{ $type->type }}" selected>{{ $type->type }}</option>
-                        </select>
-                        <select class="form-control" disabled>
-                            <option value="{{ $type->type }}" selected>{{ $type->type }}</option>
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <input type="text" name="type_price" value="{{ $type->type_price }}" class="form-control">
-                    </div>
-                    <div class="col-3">
-                        <button type="submit" class="btn btn-sm btn-success">OK</button>
-                        <a href="/backend/delete-type/{{$type->id}}" class="btn btn-sm btn-danger">Уд.</a>
-                    </div>
-                </div>
-            </form>           
-            @endforeach
-            </div>
-
-            <div class="modal" id="modal-type">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Добавить тип</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('type.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
-                                <input type="hidden" name="id" value="{{$product->id}}">
-                                <select name="type" class="form-control">
-                                    <option value="глухая">глухая</option>
-                                    <option value="остекленная">остекленная</option>
-                                    <option value="зеркало">зеркало</option>
-                                    <option value="молдинг">молдинг</option>
-                                </select>
-                                <input type="text" name="type_price" class="form-control mb-3">
-                                <button type="submit" class="btn btn-lg btn-success">Добавить тип</button>
                             </form>
                         </div>
                     </div>

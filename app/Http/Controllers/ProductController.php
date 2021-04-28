@@ -24,7 +24,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('backend.products.edit', compact('product'));
+        $products = Product::all();
+        $types = Type::all();
+        return view('backend.products.edit', compact('product', 'products', 'types'));
     }
 
     public function file($type)
@@ -118,6 +120,10 @@ class ProductController extends Controller
         $products->surface = $data['surface'];
         $products->style = $data['style'];
         $products->save();
+        $products->types()->detach();
+        $products->types()->attach($request->type, ['product_id' => $products->id]);
+        $products->othertypes()->detach();
+        $products->othertypes()->attach($request->othertypes, ['product_id' => $products->id]);
         return redirect('/backend/products');
     }
 

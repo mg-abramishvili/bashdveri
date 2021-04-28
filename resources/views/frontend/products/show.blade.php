@@ -26,8 +26,22 @@
                             @foreach($product->types as $type)
                                 <div class="form-group">
                                     <input type="radio" id="type{{ $type->id }}" name="type" value="{{ $type->id }}" data-price="{{ $type->type_price }}" @if($type->id == $producttype) checked @endif>
-                                    <label for="type{{ $type->id }}">{{ $type->type }}</label>
+                                    <label for="type{{ $type->id }}" style="border-color: #bea67c;">{{ $type->type }}</label>
                                 </div>
+                            @endforeach
+                            @foreach($product->othertypes as $ot)
+                                @foreach($ot->types as $tp)
+                                    <a href="/products/{{$ot->id}}/1/1/1" style="    display: inline-block;
+                                        cursor: pointer;
+                                        padding: 0px 15px;
+                                        line-height: 34px;
+                                        border: 2px solid #ddd;
+                                        border-radius: 6px;
+                                        user-select: none;
+                                        margin: 0; color: #333;">
+                                        {{$tp->type}}
+                                    </a>
+                                @endforeach
                             @endforeach
                         </div>
                     </div>

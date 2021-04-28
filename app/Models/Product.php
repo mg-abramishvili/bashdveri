@@ -27,4 +27,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Type');
     }
+
+    public function othertypes()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_product', 'product_id', 'othertype_id');
+    }
 }
