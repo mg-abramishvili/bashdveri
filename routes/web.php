@@ -15,7 +15,9 @@ Auth::routes([
 ]);
 
 // PRODUCTS (BACKEND)
-Route::resource('/backend/products', ProductController::class)->middleware('auth');
+Route::get('/backend/products','App\Http\Controllers\ProductController@products_index')->middleware('auth');
+Route::get('/backend/products/create','App\Http\Controllers\ProductController@products_create')->middleware('auth');
+Route::post('/backend/products','App\Http\Controllers\ProductController@products_store')->middleware('auth');
 Route::get('/backend/products/delete/{id}','App\Http\Controllers\ProductController@delete')->middleware('auth');
 Route::post('/backend/products/file/{method}','App\Http\Controllers\ProductController@file')->middleware('auth');
 
@@ -23,27 +25,17 @@ Route::post('/backend/products/file/{method}','App\Http\Controllers\ProductContr
 Route::post('/backend/add-color/{product}', 'App\Http\Controllers\ProductController@addColor')->name('color.add')->middleware('auth');
 Route::post('/backend/update-color/{color}', 'App\Http\Controllers\ProductController@updateColor')->name('color.update')->middleware('auth');
 Route::post('/backend/add-color/file/{method}','App\Http\Controllers\ProductController@file')->middleware('auth');
+Route::get('/backend/delete-color/{color_id}','App\Http\Controllers\ProductController@deleteColor')->middleware('auth');
 
 // SIZES (BACKEND)
 Route::post('/backend/add-size/{product}', 'App\Http\Controllers\ProductController@addSize')->name('size.add')->middleware('auth');
 Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductController@updateSize')->name('size.update')->middleware('auth');
-
-// TYPES (BACKEND)
-Route::post('/backend/add-type/{product}', 'App\Http\Controllers\ProductController@addType')->name('type.add')->middleware('auth');
-Route::post('/backend/update-type/{type}', 'App\Http\Controllers\ProductController@updateType')->name('type.update')->middleware('auth');
-Route::get('/backend/delete-type/{id}', 'App\Http\Controllers\ProductController@deleteType')->name('type.delete')->middleware('auth');
+Route::get('/backend/delete-size/{size_id}','App\Http\Controllers\ProductController@deleteSize')->middleware('auth');
 
 // PRODUCTS (FRONTEND)
 Route::get('/products','App\Http\Controllers\FrontProductController@index');
 Route::get('/products/{id}/{productcolor}/{productsize}/{producttype}','App\Http\Controllers\FrontProductController@show');
 Route::get('/filter/color={filtercolor}&size={filtersize}&style={filterstyle}&type={filtertype}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
-
-// CART
-Route::get('/add-to-cart/{product}','App\Http\Controllers\CartController@add')->name('cart.add');
-Route::get('/cart','App\Http\Controllers\CartController@index')->name('cart.index');
-Route::get('/cart/delete/{itemId}','App\Http\Controllers\CartController@delete')->name('cart.delete');
-Route::get('/cart/update/{itemId}','App\Http\Controllers\CartController@update')->name('cart.update');
-
 
 Route::get('/', function () {
     return view('welcome');

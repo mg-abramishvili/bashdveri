@@ -39,32 +39,31 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="style" class="font-weight-bold">Подкатегория</label>
-                        <select id="style" name="style" class="form-control">
-                            <option value="Современный">Современный</option>
-                            <option value="Классика">Классика</option>
-                            <option value="Неоклассика">Неоклассика</option>
-                            <option value="Ультра">Ультра</option>
+                        <label class="font-weight-bold">Стиль</label>
+                        <select name="styles" class="form-control">
+                            <option disabled selected value> -- Выберите стиль -- </option>
+                            @foreach ($styles as $style)
+                                <option value="{{ $style->id }}">{{ $style->name }}</option>
+                            @endforeach
                         </select>
                         @if ($errors->has('style'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('style') }}-->
-                                Укажите подкатегорию
+                                Укажите стиль
                             </div>
                         @endif
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="construct_type" class="font-weight-bold">Конструкция</label>
-                        <select id="construct_type" name="construct_type" class="form-control">
-                            <option value="царговая">царговая</option>
-                            <option value="щитовая">щитовая</option>
-                            <option value="массив">массив</option>
+                        <label class="font-weight-bold">Конструкция</label>
+                        <select name="constructs" class="form-control">
+                            <option disabled selected value> -- Выберите конструкцию -- </option>
+                            @foreach ($constructs as $construct)
+                                <option value="{{ $construct->id }}">{{ $construct->name }}</option>
+                            @endforeach
                         </select>
-                        @if ($errors->has('construct_type'))
+                        @if ($errors->has('constructs'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('construct_type') }}-->
                                 Укажите конструкцию
                             </div>
                         @endif
@@ -72,19 +71,15 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="surface" class="font-weight-bold">Покрытие</label>
-                        <select id="surface" name="surface" class="form-control">
-                            <option value="ламинированная">ламинированная</option>
-                            <option value="пвх">пвх</option>
-                            <option value="экошпон">экошпон</option>
-                            <option value="экокрафт">экокрафт</option>
-                            <option value="эмаль">эмаль</option>
-                            <option value="шпон">шпон</option>
-                            <option value="массив">массив</option>
+                        <label class="font-weight-bold">Покрытие</label>
+                        <select name="surfaces" class="form-control">
+                            <option disabled selected value> -- Выберите покрытие -- </option>
+                            @foreach ($surfaces as $surface)
+                                <option value="{{ $surface->id }}">{{ $surface->name }}</option>
+                            @endforeach
                         </select>
-                        @if ($errors->has('surface'))
+                        @if ($errors->has('surfaces'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('surface') }}-->
                                 Укажите покрытие
                             </div>
                         @endif
@@ -92,24 +87,15 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
-                        <label for="manufacturer" class="font-weight-bold">Производитель</label>
-                        <select id="manufacturer" name="manufacturer" class="form-control">
-                            <option value="VFD">VFD</option>
-                            <option value="ВДК">ВДК</option>
-                            <option value="Optima Porte">Optima Porte</option>
-                            <option value="ДверЛайн">ДверЛайн</option>
-                            <option value="Гринлайн">Гринлайн</option>
-                            <option value="Лорд">Лорд</option>
-                            <option value="Терри">Терри</option>
-                            <option value="Ферони">Ферони</option>
-                            <option value="Аргус">Аргус</option>
-                            <option value="Тайгер">Тайгер</option>
-                            <option value="Агат">Агат</option>
-                            <option value="Меги">Меги</option>
+                        <label class="font-weight-bold">Производитель</label>
+                        <select name="manufacturers" class="form-control">
+                            <option disabled selected value> -- Выберите производителя -- </option>
+                            @foreach ($manufacturers as $manufacturer)
+                                <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                            @endforeach
                         </select>
-                        @if ($errors->has('manufacturer'))
+                        @if ($errors->has('manufacturers'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('manufacturer') }}-->
                                 Укажите производителя
                             </div>
                         @endif

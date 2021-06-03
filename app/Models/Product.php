@@ -10,7 +10,9 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'base_price', 'description', 'construct_type', 'manufacturer', 'surface', 'style'
+        'title',
+        'base_price',
+        'description',
     ];
 
     public function colors()
@@ -28,8 +30,28 @@ class Product extends Model
         return $this->belongsToMany('App\Models\Type');
     }
 
-    public function othertypes()
+    public function styles()
     {
-        return $this->belongsToMany('App\Models\Product', 'product_product', 'product_id', 'othertype_id');
+        return $this->belongsToMany('App\Models\Style');
+    }
+
+    public function constructs()
+    {
+        return $this->belongsToMany('App\Models\Construct');
+    }
+
+    public function surfaces()
+    {
+        return $this->belongsToMany('App\Models\Surface');
+    }
+
+    public function manufacturers()
+    {
+        return $this->belongsToMany('App\Models\Manufacturer');
+    }
+
+    public function other_products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_product', 'product_id', 'oproduct_id');
     }
 }

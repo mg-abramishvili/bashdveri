@@ -10,7 +10,7 @@ class Size extends Model
     use HasFactory;
 
     protected $fillable = [
-        'size', 'size_price'
+        'name', 'price'
     ];
 
     public function products()

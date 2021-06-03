@@ -6,22 +6,30 @@ use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Type;
+use App\Models\Surface;
+use App\Models\Manufacturer;
+use App\Models\Construct;
+use App\Models\Style;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function products_index()
     {
         $products = Product::all();
         return view('backend.products.index', compact('products'));
     }
 
-    public function create()
+    public function products_create()
     {
-        return view('backend.products.create');
+        $styles = Style::all();
+        $constructs = Construct::all();
+        $surfaces = Surface::all();
+        $manufacturers = Manufacturer::all();
+        return view('backend.products.create', compact('styles', 'constructs', 'surfaces', 'manufacturers'));
     }
 
-    public function edit($id)
+    public function products_edit($id)
     {
         $product = Product::find($id);
         $products = Product::all();
@@ -29,53 +37,22 @@ class ProductController extends Controller
         return view('backend.products.edit', compact('product', 'products', 'types'));
     }
 
-    public function file($type)
-    {
-
-        switch ($type) {
-            case 'upload':
-                return $this->upload();
-
-
-        }
-
-        return \Response::make('success', 200, [
-            'Content-Disposition' => 'inline',
-        ]);
-    }
-
-    public function upload()
-    {
-
-        if (request()->file('color_image')) {
-            $file = request()->file('color_image');
-
-            $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path() . '/uploads', $filename);
-
-            return \Response::make('/uploads/' . $filename, 200, [
-                'Content-Disposition' => 'inline',
-            ]);
-        }
-
-    }
-
-    public function delete($id)
+    public function products_delete($id)
     {
         $product = Product::find($id);
         $product->delete();
         return redirect('/backend/products');
     }
 
-    public function store(Request $request)
+    public function products_store(Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
             'base_price' => 'required',
-            'construct_type' => 'required',
-            'manufacturer' => 'required',
-            'surface' => 'required',
-            'style' => 'required',
+            'constructs' => 'required',
+            'manufacturers' => 'required',
+            'surfaces' => 'required',
+            'styles' => 'required',
         ]);
 
         $data = request()->all();
@@ -86,16 +63,16 @@ class ProductController extends Controller
         if (!empty($data['description'])) {
             $products->description = $data['description'];
         }
-
-        $products->construct_type = $data['construct_type'];
-        $products->manufacturer = $data['manufacturer'];
-        $products->surface = $data['surface'];
-        $products->style = $data['style'];
+        
         $products->save();
+        $products->styles()->attach($request->styles, ['product_id' => $products->id]);
+        $products->constructs()->attach($request->constructs, ['product_id' => $products->id]);
+        $products->surfaces()->attach($request->surfaces, ['product_id' => $products->id]);
+        $products->manufacturers()->attach($request->manufacturers, ['product_id' => $products->id]);
         return redirect('/backend/products');
     }
 
-    public function update(Request $request)
+    public function products_update(Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -127,6 +104,31 @@ class ProductController extends Controller
         return redirect('/backend/products');
     }
 
+    public function file($type)
+    {
+        switch ($type) {
+            case 'upload':
+                return $this->upload();
+        }
+        return \Response::make('success', 200, [
+            'Content-Disposition' => 'inline',
+        ]);
+    }
+
+    public function upload()
+    {
+        if (request()->file('color_image')) {
+            $file = request()->file('color_image');
+
+            $filename = md5(time() . rand(1, 100000)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '/uploads', $filename);
+
+            return \Response::make('/uploads/' . $filename, 200, [
+                'Content-Disposition' => 'inline',
+            ]);
+        }
+    }
+
     public function addColor(Request $request) {
         $data = request()->all();
         $products = Product::find($data['id']);
@@ -135,8 +137,8 @@ class ProductController extends Controller
             'color_price' => $data['color_price'],
             'color_image' => $data['color_image']
         ]);
-
-        $products->colors()->save($color);
+        $color->save();
+        $products->colors()->attach($color->id, ['product_id' => $products->id]);
         return back();
     }
 
@@ -147,6 +149,13 @@ class ProductController extends Controller
         $color->color_price = $data['color_price'];
         $color->color_image = $data['color_image'];
         $color->save();
+        return back();
+    }
+
+    public function deleteColor($color_id) {
+        $color = Color::find($color_id);
+        $color->delete();
+        $color->products()->detach();
         return back();
     }
 
@@ -171,30 +180,4 @@ class ProductController extends Controller
         return back();
     }
 
-    public function addType(Request $request) {
-        $data = request()->all();
-        $products = Product::find($data['id']);
-        $type = new Type([
-            'type' => $data['type'],
-            'type_price' => $data['type_price']
-        ]);
-
-        $products->types()->save($type);
-        return back();
-    }
-
-    public function updateType(Request $request) {
-        $data = request()->all();
-        $type = Type::find($data['id']);
-        $type->type = $data['type'];
-        $type->type_price = $data['type_price'];
-        $type->save();
-        return back();
-    }
-
-    public function deleteType($id) {
-        $type = Type::find($id);
-        $type->delete();
-        return back();
-    }
 }

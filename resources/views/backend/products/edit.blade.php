@@ -231,6 +231,7 @@
                     </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
+                        <a href="/backend/delete-color/{{$color->id}}" class="btn btn-sm btn-danger">Удалить</a>
                     </div>
                 </div>
             </form>
