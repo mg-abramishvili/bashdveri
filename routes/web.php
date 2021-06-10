@@ -6,8 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontProductController;
 use App\Http\Controllers\CartController;
 
-use Spatie\QueryBuilder\QueryBuilder;
-
 // AUTH
 Auth::routes([
     'register' => false,
@@ -17,7 +15,9 @@ Auth::routes([
 // PRODUCTS (BACKEND)
 Route::get('/backend/products','App\Http\Controllers\ProductController@products_index')->middleware('auth');
 Route::get('/backend/products/create','App\Http\Controllers\ProductController@products_create')->middleware('auth');
+Route::get('/backend/product/{id}/edit','App\Http\Controllers\ProductController@product_edit')->middleware('auth');
 Route::post('/backend/products','App\Http\Controllers\ProductController@products_store')->middleware('auth');
+Route::post('/backend/product/{id}','App\Http\Controllers\ProductController@product_update')->middleware('auth');
 Route::get('/backend/products/delete/{id}','App\Http\Controllers\ProductController@delete')->middleware('auth');
 Route::post('/backend/products/file/{method}','App\Http\Controllers\ProductController@file')->middleware('auth');
 
@@ -32,11 +32,6 @@ Route::post('/backend/add-size/{product}', 'App\Http\Controllers\ProductControll
 Route::post('/backend/update-size/{size}', 'App\Http\Controllers\ProductController@updateSize')->name('size.update')->middleware('auth');
 Route::get('/backend/delete-size/{size_id}','App\Http\Controllers\ProductController@deleteSize')->middleware('auth');
 
-// PRODUCTS (FRONTEND)
-Route::get('/products','App\Http\Controllers\FrontProductController@index');
-Route::get('/products/{id}/{productcolor}/{productsize}/{producttype}','App\Http\Controllers\FrontProductController@show');
-Route::get('/filter/color={filtercolor}&size={filtersize}&style={filterstyle}&type={filtertype}&manufacturer={filtermanufacturer}','App\Http\Controllers\FrontProductController@filterColor');
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{any}', function () {
+    return view('layouts.vue');
+})->where('any', '^(?!backend).*$');

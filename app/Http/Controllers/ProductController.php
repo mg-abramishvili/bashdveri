@@ -29,12 +29,16 @@ class ProductController extends Controller
         return view('backend.products.create', compact('styles', 'constructs', 'surfaces', 'manufacturers'));
     }
 
-    public function products_edit($id)
+    public function product_edit($id)
     {
-        $product = Product::find($id);
-        $products = Product::all();
+        $product = Product::with('styles', 'other_products')->find($id);
+        $products = Product::with('other_products')->get();
         $types = Type::all();
-        return view('backend.products.edit', compact('product', 'products', 'types'));
+        $styles = Style::all();
+        $constructs = Construct::all();
+        $surfaces = Surface::all();
+        $manufacturers = Manufacturer::all();
+        return view('backend.products.edit', compact('product', 'products', 'types', 'styles', 'constructs', 'surfaces', 'manufacturers'));
     }
 
     public function products_delete($id)
@@ -72,15 +76,15 @@ class ProductController extends Controller
         return redirect('/backend/products');
     }
 
-    public function products_update(Request $request)
+    public function product_update(Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
             'base_price' => 'required',
-            'construct_type' => 'required',
-            'manufacturer' => 'required',
-            'surface' => 'required',
-            'style' => 'required',
+            'constructs' => 'required',
+            'manufacturers' => 'required',
+            'surfaces' => 'required',
+            'styles' => 'required',
         ]);
 
         $data = request()->all();
@@ -91,16 +95,20 @@ class ProductController extends Controller
         if (!empty($data['description'])) {
             $products->description = $data['description'];
         }
-
-        $products->construct_type = $data['construct_type'];
-        $products->manufacturer = $data['manufacturer'];
-        $products->surface = $data['surface'];
-        $products->style = $data['style'];
+        
         $products->save();
+        $products->styles()->detach();
+        $products->styles()->attach($request->styles, ['product_id' => $products->id]);
+        $products->constructs()->detach();
+        $products->constructs()->attach($request->constructs, ['product_id' => $products->id]);
+        $products->surfaces()->detach();
+        $products->surfaces()->attach($request->surfaces, ['product_id' => $products->id]);
+        $products->manufacturers()->detach();
+        $products->manufacturers()->attach($request->manufacturers, ['product_id' => $products->id]);
         $products->types()->detach();
-        $products->types()->attach($request->type, ['product_id' => $products->id]);
-        $products->othertypes()->detach();
-        $products->othertypes()->attach($request->othertypes, ['product_id' => $products->id]);
+        $products->types()->attach($request->types, ['product_id' => $products->id]);
+        $products->other_products()->detach();
+        $products->other_products()->attach($request->other_products, ['product_id' => $products->id]);
         return redirect('/backend/products');
     }
 

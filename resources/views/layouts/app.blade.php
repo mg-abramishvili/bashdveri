@@ -8,7 +8,10 @@
 
     <title>БашДвери - панель управления</title>
 
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <link href="{{ asset('css/filepond.css') }}" rel="stylesheet">
     <link href="{{ asset('css/filepond-plugin-image-preview.css') }}" rel="stylesheet">
@@ -16,12 +19,17 @@
     <script src="{{ asset('js/filepond.js') }}"></script>
     <script src="{{ asset('js/filepond.jquery.js') }}"></script>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 1px 16px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
+    <div id="backend">
     @guest
     @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

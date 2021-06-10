@@ -20,7 +20,7 @@
                         {{$product->title}}
                     </td>
                     <td style="width: 200px; text-align: center;">
-                        <a href="/backend/products/{{$product->id}}/edit" class="btn btn-sm btn-warning">Изменить</a>
+                        <a href="/backend/product/{{$product->id}}/edit" class="btn btn-sm btn-warning">Изменить</a>
                         <a href="/backend/products/delete/{{$product->id}}" class="btn btn-sm btn-danger">Удалить</a>
                     </td>
                 </tr>

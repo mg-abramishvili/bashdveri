@@ -9,8 +9,7 @@
 
         <div class="col-12 col-md-5">
             <div class="box">
-            <form action="/backend/products/{{$product->id}}" method="post" enctype="multipart/form-data">@csrf
-                @method('PUT')
+            <form action="/backend/product/{{$product->id}}" method="post" enctype="multipart/form-data">@csrf
                 <input type="hidden" name="id" value="{{$product->id}}">
 
                 <div class="row">
@@ -20,7 +19,6 @@
                             <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
                             @if ($errors->has('title'))
                                 <div class="alert alert-danger">
-                                    <!--{{ $errors->first('title') }}-->
                                     Укажите название
                                 </div>
                             @endif
@@ -32,7 +30,6 @@
                             <input type="text" class="form-control" id="base_price" name="base_price" placeholder="Базовая стоимость" value="{{ $product->base_price }}">
                             @if ($errors->has('base_price'))
                                 <div class="alert alert-danger">
-                                    <!--{{ $errors->first('base_price') }}-->
                                     Укажите базовую стоимость
                                 </div>
                             @endif
@@ -43,28 +40,15 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                        <label for="style" class="font-weight-bold">Подкатегория</label>
-                        <select id="style" name="style" class="form-control">
-                            <option value="{{ $product->style }}">{{ $product->style }}</option>
-                            <option value="Современный">Современный</option>
-                            <option value="Классика">Классика</option>
-                            <option value="Неоклассика">Неоклассика</option>
-                            <option value="Ультра">Ультра</option>
+                        <label for="styles" class="font-weight-bold">Стиль</label>
+                        <select id="styles" name="styles" class="form-control">
+                            @foreach($styles as $style)
+                                <option value="{{$style->id}}" @foreach($product->styles as $ps) @if($ps->id == $style->id) selected @endif @endforeach>{{$style->name}}</option>
+                            @endforeach
                         </select>
-                        <script>
-                            var optionValues =[];
-                            $('#style option').each(function(){
-                            if($.inArray(this.value, optionValues) >-1){
-                                $(this).remove()
-                            }else{
-                                optionValues.push(this.value);
-                            }
-                            });
-                        </script>
 
-                        @if ($errors->has('style'))
+                        @if ($errors->has('styles'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('style') }}-->
                                 Укажите подкатегорию
                             </div>
                         @endif
@@ -72,27 +56,15 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                        <label for="construct_type" class="font-weight-bold">Конструкция</label>
-                            <select id="construct_type" name="construct_type" class="form-control">
-                                <option value="{{ $product->construct_type }}">{{ $product->construct_type }}</option>
-                                <option value="царговая">царговая</option>
-                                <option value="щитовая">щитовая</option>
-                                <option value="массив">массив</option>
+                        <label for="constructs" class="font-weight-bold">Конструкция</label>
+                            <select id="constructs" name="constructs" class="form-control">
+                                @foreach($constructs as $construct)
+                                    <option value="{{$construct->id}}" @foreach($product->constructs as $pc) @if($pc->id == $construct->id) selected @endif @endforeach>{{$construct->name}}</option>
+                                @endforeach
                             </select>
-                            <script>
-                                var optionValues =[];
-                                $('#construct_type option').each(function(){
-                                if($.inArray(this.value, optionValues) >-1){
-                                    $(this).remove()
-                                }else{
-                                    optionValues.push(this.value);
-                                }
-                                });
-                            </script>
                             
-                            @if ($errors->has('construct_type'))
+                            @if ($errors->has('constructs'))
                                 <div class="alert alert-danger">
-                                    <!--{{ $errors->first('construct_type') }}-->
                                     Укажите конструкцию
                                 </div>
                             @endif
@@ -100,42 +72,26 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="type" class="font-weight-bold">Тип</label>
-                            <select id="type" name="type" class="form-control">
+                            <label for="types" class="font-weight-bold">Тип</label>
+                            <select id="types" name="types" class="form-control">
                                 <option disabled selected>Выберите</option>
                                 @foreach($types as $type)
-                                    <option value="{{ $type->id }}" @foreach($product->types as $t) @if($type->id == $t->id)selected="selected"@endif @endforeach>{{ $type->type }}</option>
+                                    <option value="{{ $type->id }}" @foreach($product->types as $t) @if($type->id == $t->id) selected @endif @endforeach>{{ $type->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label for="surface" class="font-weight-bold">Покрытие</label>
-                            <select id="surface" name="surface" class="form-control">
-                                <option value="{{ $product->surface }}">{{ $product->surface }}</option>
-                                <option value="ламинированная">ламинированная</option>
-                                <option value="пвх">пвх</option>
-                                <option value="экошпон">экошпон</option>
-                                <option value="экокрафт">экокрафт</option>
-                                <option value="эмаль">эмаль</option>
-                                <option value="шпон">шпон</option>
-                                <option value="массив">массив</option>
+                            <label for="surfaces" class="font-weight-bold">Покрытие</label>
+                            <select id="surfaces" name="surfaces" class="form-control">
+                                @foreach($surfaces as $surface)
+                                    <option value="{{$surface->id}}" @foreach($product->surfaces as $ps) @if($ps->id == $surface->id) selected @endif @endforeach>{{$surface->name}}</option>
+                                @endforeach
                             </select>
-                            <script>
-                                var optionValues =[];
-                                $('#surface option').each(function(){
-                                if($.inArray(this.value, optionValues) >-1){
-                                    $(this).remove()
-                                }else{
-                                    optionValues.push(this.value);
-                                }
-                                });
-                            </script>
 
-                            @if ($errors->has('surface'))
+                            @if ($errors->has('surfaces'))
                                 <div class="alert alert-danger">
-                                    <!--{{ $errors->first('surface') }}-->
                                     Укажите покрытие
                                 </div>
                             @endif
@@ -143,36 +99,15 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <label for="manufacturer" class="font-weight-bold">Производитель</label>
-                            <select id="manufacturer" name="manufacturer" class="form-control">
-                                <option value="{{ $product->manufacturer }}">{{ $product->manufacturer }}</option>
-                                <option value="VFD">VFD</option>
-                                <option value="ВДК">ВДК</option>
-                                <option value="Optima Porte">Optima Porte</option>
-                                <option value="ДверЛайн">ДверЛайн</option>
-                                <option value="Гринлайн">Гринлайн</option>
-                                <option value="Лорд">Лорд</option>
-                                <option value="Терри">Терри</option>
-                                <option value="Ферони">Ферони</option>
-                                <option value="Аргус">Аргус</option>
-                                <option value="Тайгер">Тайгер</option>
-                                <option value="Агат">Агат</option>
-                                <option value="Меги">Меги</option>
+                            <label for="manufacturers" class="font-weight-bold">Производитель</label>
+                            <select id="manufacturers" name="manufacturers" class="form-control">
+                                @foreach($manufacturers as $manufacturer)
+                                    <option value="{{$manufacturer->id}}" @foreach($product->manufacturers as $pm) @if($pm->id == $manufacturer->id) selected @endif @endforeach>{{$manufacturer->name}}</option>
+                                @endforeach
                             </select>
-                            <script>
-                                var optionValues =[];
-                                $('#manufacturer option').each(function(){
-                                if($.inArray(this.value, optionValues) >-1){
-                                    $(this).remove()
-                                }else{
-                                    optionValues.push(this.value);
-                                }
-                                });
-                            </script>
                             
-                            @if ($errors->has('manufacturer'))
+                            @if ($errors->has('manufacturers'))
                                 <div class="alert alert-danger">
-                                    <!--{{ $errors->first('manufacturer') }}-->
                                     Укажите производителя
                                 </div>
                             @endif
@@ -185,16 +120,17 @@
                     <textarea rows="4" class="form-control" id="description" name="description" placeholder="Описание">{{$product->description}}</textarea>
                     @if ($errors->has('description'))
                         <div class="alert alert-danger">
-                            <!--{{ $errors->first('description') }}-->
                             Укажите описание
                         </div>
                     @endif
                 </div>
 
                 <div class="form-group">
-                    <select name="othertypes[]" class="custom-select" multiple>
+                    <select name="other_products[]" class="custom-select" multiple>
                         @foreach($products as $pd)
-                            <option value="{{$pd->id}}" @foreach($product->othertypes as $ot) @if($pd->id == $ot->id)selected="selected"@endif @endforeach>{{$pd->title}} @foreach($pd->types as $pdt) {{ $pdt->type }} @endforeach</option>
+                            @if($product->id != $pd->id)
+                            <option value="{{$pd->id}}" @foreach($product->other_products as $ot) @if($pd->id == $ot->id) selected @endif @endforeach>{{$pd->title}} @foreach($pd->types as $pdt) {{ $pdt->type }} @endforeach</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
