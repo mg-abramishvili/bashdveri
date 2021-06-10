@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <h1>{{$product->title}}</h1>
-            <p style="color: #999">Изменение двери</p>
+            <p style="color: #999">Редактирование</p>
         </div>
 
         <div class="col-12 col-md-5">
@@ -160,10 +160,10 @@
                         <input class="color_image{{$color->id}}" type="file" name="color_image" x-ref="color_image">
                     </div>
                     <div class="col-4">
-                        <input type="text" name="color" value="{{ $color->color }}" class="form-control">
+                        <input type="text" name="color_name" value="{{ $color->name }}" class="form-control">
                     </div>
                     <div class="col-3">
-                        <input type="text" name="color_price" value="{{ $color->color_price }}" class="form-control">
+                        <input type="text" name="color_price" value="{{ $color->price }}" class="form-control">
                     </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
@@ -228,7 +228,7 @@
 
                     files: [
                         {
-                            source: '{{ $color->color_image }}',
+                            source: '{{ $color->image }}',
                             options: {
                                 type: 'local',
                             }
@@ -257,12 +257,11 @@
                         <div class="modal-body">
                             <form action="{{ route('color.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
-                                <input type="text" name="color" class="form-control mb-3">
+                                <input type="text" name="color_name" class="form-control mb-3">
                                 <input type="text" name="color_price" class="form-control mb-3">
                                 <input class="color_image" type="file" name="color_image" x-ref="color_image">
                                 @if ($errors->has('color_image'))
                                     <div class="alert alert-danger">
-                                        <!--{{ $errors->first('color_image') }}-->
                                         Укажите файл
                                     </div>
                                 @endif

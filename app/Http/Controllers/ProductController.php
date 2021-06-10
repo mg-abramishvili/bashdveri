@@ -141,9 +141,9 @@ class ProductController extends Controller
         $data = request()->all();
         $products = Product::find($data['id']);
         $color = new Color([
-            'color' => $data['color'],
-            'color_price' => $data['color_price'],
-            'color_image' => $data['color_image']
+            'name' => $data['color_name'],
+            'price' => $data['color_price'],
+            'image' => $data['color_image']
         ]);
         $color->save();
         $products->colors()->attach($color->id, ['product_id' => $products->id]);
@@ -153,9 +153,9 @@ class ProductController extends Controller
     public function updateColor(Request $request) {
         $data = request()->all();
         $color = Color::find($data['id']);
-        $color->color = $data['color'];
-        $color->color_price = $data['color_price'];
-        $color->color_image = $data['color_image'];
+        $color->name = $data['color_name'];
+        $color->price = $data['color_price'];
+        $color->image = $data['color_image'];
         $color->save();
         return back();
     }
