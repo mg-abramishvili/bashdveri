@@ -19,4 +19,9 @@ class ApiController extends Controller
         return Product::get();
     }
 
+    public function product_item($id, Request $request)
+    {
+        return Product::with('colors')->find($id);
+    }
+
 }

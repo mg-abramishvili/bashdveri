@@ -5,10 +5,10 @@
                 <div class="header">
                     <div class="row align-items-center">
                         <div class="col-12 header-logo">
-                            <a href="/">
+                            <router-link :to="{name: 'Home'}">
                                 <!--<img src="http://xn--80abehgs9c4c.xn--p1ai/wp-content/themes/woo/images/logo.svg" alt="БашДвери Уфа">-->
-                                Логотип
-                            </a>
+                                БашДвери
+                            </router-link>
                         </div>
                         <div class="col-12 header-nav">
                             <nav class="navbar navbar-expand-lg">
@@ -18,10 +18,18 @@
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                     <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
                                         <ul id="menu-top-menu" class="navbar-nav mr-auto">
-                                            <li class="nav-item"><a href="/products/" class="nav-link">Каталог</a></li>
-                                            <li class="nav-item"><a href="#" class="nav-link">Отзывы</a></li>
-                                            <li class="nav-item"><a href="#" class="nav-link">Акции</a></li>
-                                            <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+                                            <li class="nav-item">
+                                                <router-link :to="{name: 'Catalog'}" class="nav-link">Каталог</router-link>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">Отзывы</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">Акции</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">Контакты</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

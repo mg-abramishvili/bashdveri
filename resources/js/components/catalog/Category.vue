@@ -1,5 +1,5 @@
 <template>
-    <div>
-        <h1>Category</h1>
+    <div class="container">
+        <h1>Категория</h1>
     </div>
 </template>

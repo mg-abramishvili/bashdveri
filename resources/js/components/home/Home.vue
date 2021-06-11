@@ -1,5 +1,5 @@
 <template>
-    <div>
-        <h1>HOME</h1>
+    <div class="container">
+        <h1>Главная страница</h1>
     </div>
 </template>
