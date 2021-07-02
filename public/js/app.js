@@ -2092,6 +2092,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -24461,18 +24564,289 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 col-md-8" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.product.title))]),
+        _c("h1", { staticClass: "mt-0 mb-4" }, [
+          _vm._v(_vm._s(_vm.product.title))
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "price mb-4" }, [
+        _c("div", { staticClass: "row align-items-center mb-3" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-md-10" }, [
+            _c(
+              "div",
+              { staticClass: "types-box" },
+              [
+                _vm._l(_vm.product.types, function(type) {
+                  return [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        attrs: {
+                          type: "radio",
+                          id: "type1",
+                          name: "type",
+                          value: "1",
+                          "data-price": "",
+                          checked: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticStyle: { "border-color": "#bea67c" },
+                          attrs: { for: "type1" }
+                        },
+                        [_vm._v(_vm._s(type.name))]
+                      )
+                    ])
+                  ]
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.product.other_products, function(other_product) {
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticStyle: {
+                          display: "inline-block",
+                          cursor: "pointer",
+                          padding: "0px 15px",
+                          "line-height": "34px",
+                          border: "2px solid #ddd",
+                          "border-radius": "6px",
+                          "user-select": "none",
+                          margin: "0",
+                          color: "#333"
+                        },
+                        attrs: {
+                          to: {
+                            name: "Product",
+                            params: { id: other_product.id }
+                          }
+                        }
+                      },
+                      [
+                        _vm._l(other_product.types, function(op_type) {
+                          return [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(op_type.name) +
+                                "\n                                "
+                            )
+                          ]
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row align-items-center mb-3" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-md-10" }, [
+            _c(
+              "div",
+              { staticClass: "colors-box" },
+              [
+                _vm._l(_vm.product.colors, function(color) {
+                  return [
+                    _c("input", {
+                      attrs: { type: "radio", id: "color_" + color.id },
+                      domProps: { value: color.id }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "color_" + color.id } }, [
+                      _vm._v(_vm._s(color.name))
+                    ])
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "price my-4" }, [
           _vm._v(_vm._s(_vm.product.base_price) + " ₽")
         ]),
         _vm._v(" "),
         _c("a", { staticClass: "btn-standard" }, [_vm._v("В корзину")])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "description mb-4" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.product.description) +
+              "\n            "
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "details-table" }, [
+      _c("table", { staticClass: "table table-striped" }, [
+        _c("tbody", [
+          _c("tr", [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.manufacturers, function(manufacturer) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(manufacturer.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.styles, function(style) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(style.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.types, function(type) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(type.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(5),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.constructs, function(construct) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(construct.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(6),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _vm._l(_vm.product.surfaces, function(surface) {
+                  return [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(surface.name) +
+                        "\n                        "
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-2" }, [
+      _c("strong", [_vm._v("Тип двери")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-2" }, [
+      _c("strong", [_vm._v("Цвет")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("strong", [_vm._v("Производитель")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("strong", [_vm._v("Стиль")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("strong", [_vm._v("Тип")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("strong", [_vm._v("Конструкция")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("strong", [_vm._v("Покрытие")])])
+  }
+]
 render._withStripped = true
 
 

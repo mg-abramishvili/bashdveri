@@ -21,7 +21,7 @@ class ApiController extends Controller
 
     public function product_item($id, Request $request)
     {
-        return Product::with('colors')->find($id);
+        return Product::with('colors', 'other_products.types', 'manufacturers', 'constructs', 'styles', 'surfaces', 'types')->find($id);
     }
 
 }
