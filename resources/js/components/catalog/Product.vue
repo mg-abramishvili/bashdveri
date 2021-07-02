@@ -10,6 +10,33 @@
             <div class="col-12 col-md-8">
                 <h1 class="mt-0 mb-4">{{ product.title }}</h1>
 
+                <div class="row product-info-buttons">
+                    <div class="col-12 col-md-3">
+                        <button>
+                            <img src="/img/ico-location.svg">
+                            <span>Где купить?</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <button>
+                            <img src="/img/ico-card.svg">
+                            <span>Как оплатить?</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <button>
+                            <img src="/img/ico-size.svg">
+                            <span>Заказать замер</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <button>
+                            <img src="/img/ico-alarm.svg">
+                            <span>Обратный звонок</span>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="row align-items-center mb-3">
                     <div class="col-12 col-md-2">
                         <strong>Тип двери</strong>
@@ -50,6 +77,8 @@
                 <div class="price my-4">{{ product.base_price }} ₽</div>
 
                 <a class="btn-standard">В корзину</a>
+
+                <div class="mt-4" style="color: #00c084;">В наличии</div>
             </div>
         </div>
 
@@ -61,7 +90,7 @@
             </div>
         </div>
 
-        <div class="details-table">
+        <div class="details-table mb-4">
 
             <table class="table table-striped">
                 <tbody>

@@ -2195,6 +2195,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -24568,8 +24597,10 @@ var render = function() {
           _vm._v(_vm._s(_vm.product.title))
         ]),
         _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
         _c("div", { staticClass: "row align-items-center mb-3" }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 col-md-10" }, [
             _c(
@@ -24647,7 +24678,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row align-items-center mb-3" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 col-md-10" }, [
             _c(
@@ -24676,7 +24707,11 @@ var render = function() {
           _vm._v(_vm._s(_vm.product.base_price) + " ₽")
         ]),
         _vm._v(" "),
-        _c("a", { staticClass: "btn-standard" }, [_vm._v("В корзину")])
+        _c("a", { staticClass: "btn-standard" }, [_vm._v("В корзину")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-4", staticStyle: { color: "#00c084" } }, [
+          _vm._v("В наличии")
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -24692,11 +24727,11 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "details-table" }, [
+    _c("div", { staticClass: "details-table mb-4" }, [
       _c("table", { staticClass: "table table-striped" }, [
         _c("tbody", [
           _c("tr", [
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "td",
@@ -24716,7 +24751,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _vm._m(3),
+            _vm._m(4),
             _vm._v(" "),
             _c(
               "td",
@@ -24736,7 +24771,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _vm._m(4),
+            _vm._m(5),
             _vm._v(" "),
             _c(
               "td",
@@ -24756,7 +24791,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _vm._m(5),
+            _vm._m(6),
             _vm._v(" "),
             _c(
               "td",
@@ -24776,7 +24811,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("tr", [
-            _vm._m(6),
+            _vm._m(7),
             _vm._v(" "),
             _c(
               "td",
@@ -24800,6 +24835,44 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row product-info-buttons" }, [
+      _c("div", { staticClass: "col-12 col-md-3" }, [
+        _c("button", [
+          _c("img", { attrs: { src: "/img/ico-location.svg" } }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Где купить?")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 col-md-3" }, [
+        _c("button", [
+          _c("img", { attrs: { src: "/img/ico-card.svg" } }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Как оплатить?")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 col-md-3" }, [
+        _c("button", [
+          _c("img", { attrs: { src: "/img/ico-size.svg" } }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Заказать замер")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 col-md-3" }, [
+        _c("button", [
+          _c("img", { attrs: { src: "/img/ico-alarm.svg" } }),
+          _vm._v(" "),
+          _c("span", [_vm._v("Обратный звонок")])
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

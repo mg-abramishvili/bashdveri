@@ -306,4 +306,46 @@ footer {
 	background: #efefef;
 	color: #666;
 }
+
+.details-table table td:first-child {
+    width: 25%;
+}
+
+.details-table .table td,
+.details-table .table th {
+    padding: 10px 15px;
+}
+
+.details-table .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.03);
+}
+
+.product-info-buttons {
+    margin-bottom: 25px;
+}
+
+.product-info-buttons button {
+    box-shadow: none;
+    border: 0;
+    text-align: center;
+    background: none;
+    padding: 15px;
+    border: 1px solid #ddd;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.product-info-buttons button img {
+    width: 25px;
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.product-info-buttons button span {
+    border-bottom: 1px dashed;
+    font-size: 14px;
+    color: #bea67c;
+}
 /* PRODUCT DETAIL */
