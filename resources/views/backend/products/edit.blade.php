@@ -13,7 +13,7 @@
                 <input type="hidden" name="id" value="{{$product->id}}">
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Название</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Название" value="{{ $product->title }}">
@@ -26,13 +26,19 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="base_price" class="font-weight-bold">Базовая стоимость</label>
-                            <input type="text" class="form-control" id="base_price" name="base_price" placeholder="Базовая стоимость" value="{{ $product->base_price }}">
+                            <label for="base_price" class="font-weight-bold">Базовая цена</label>
+                            <input type="text" class="form-control" id="base_price" name="base_price" placeholder="Базовая цена" value="{{ $product->base_price }}">
                             @if ($errors->has('base_price'))
                                 <div class="alert alert-danger">
-                                    Укажите базовую стоимость
+                                    Укажите базовую цену
                                 </div>
                             @endif
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="old_price" class="font-weight-bold">Старая цена</label>
+                            <input type="text" class="form-control" id="old_price" name="old_price" placeholder="Старая цена" value="{{ $product->old_price }}">
                         </div>
                     </div>
                 </div>
@@ -70,13 +76,24 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="types" class="font-weight-bold">Тип</label>
                             <select id="types" name="types" class="form-control">
                                 <option disabled selected>Выберите</option>
                                 @foreach($types as $type)
                                     <option value="{{ $type->id }}" @foreach($product->types as $t) @if($type->id == $t->id) selected @endif @endforeach>{{ $type->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="productions" class="font-weight-bold">Срок изготовления</label>
+                            <select id="productions" name="productions" class="form-control">
+                                <option disabled selected>Выберите</option>
+                                @foreach($productions as $production)
+                                    <option value="{{ $production->id }}" @foreach($product->productions as $p) @if($production->id == $p->id) selected @endif @endforeach>{{ $production->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -126,10 +143,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="font-weight-bold">Связка с другим типом двери</label>
                     <select name="other_products[]" class="custom-select" multiple>
                         @foreach($products as $pd)
                             @if($product->id != $pd->id)
-                            <option value="{{$pd->id}}" @foreach($product->other_products as $ot) @if($pd->id == $ot->id) selected @endif @endforeach>{{$pd->title}} @foreach($pd->types as $pdt) {{ $pdt->type }} @endforeach</option>
+                            <option value="{{$pd->id}}" @foreach($product->other_products as $ot) @if($pd->id == $ot->id) selected @endif @endforeach>{{$pd->title}} @foreach($pd->types as $pdt) - {{ $pdt->name }} @endforeach</option>
                             @endif
                         @endforeach
                     </select>
@@ -257,7 +275,9 @@
                         <div class="modal-body">
                             <form action="{{ route('color.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
+                                <label>Цвет</label>
                                 <input type="text" name="color_name" class="form-control mb-3">
+                                <label>Цена</label>
                                 <input type="text" name="color_price" class="form-control mb-3">
                                 <input class="color_image" type="file" name="color_image" x-ref="color_image">
                                 @if ($errors->has('color_image'))
@@ -287,10 +307,10 @@
                 <input type="hidden" name="id" value="{{$size->id}}">
                 <div class="row align-items-center">
                     <div class="col-7">
-                        <input type="text" name="size" value="{{ $size->size }}" class="form-control">
+                        <input type="text" name="size_name" value="{{ $size->name }}" class="form-control">
                     </div>
                     <div class="col-3">
-                        <input type="text" name="size_price" value="{{ $size->size_price }}" class="form-control">
+                        <input type="text" name="size_price" value="{{ $size->price }}" class="form-control">
                     </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-sm btn-success" style="width:100%;">OK</button>
@@ -310,7 +330,15 @@
                         <div class="modal-body">
                             <form action="{{ route('size.add', $product->id) }}" method="post" enctype="multipart/form-data">@csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
-                                <input type="text" name="size" class="form-control mb-3">
+                                <label>Размер</label>
+                                <select name="size_name" class="form-control mb-3">
+                                    <option value="600&times;2000">600&times;2000</option>
+                                    <option value="700&times;2000">700&times;2000</option>
+                                    <option value="800&times;2000">800&times;2000</option>
+                                    <option value="900&times;2000">900&times;2000</option>
+                                    <option value="">нестандарт</option>
+                                </select>
+                                <label>Цена</label>
                                 <input type="text" name="size_price" class="form-control mb-3">
                                 <button type="submit" class="btn btn-lg btn-success">Добавить размер</button>
                             </form>

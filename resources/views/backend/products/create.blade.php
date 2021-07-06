@@ -10,7 +10,7 @@
 
         <form action="/backend/products" method="post" enctype="multipart/form-data">@csrf
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="form-group">
                         <label for="title" class="font-weight-bold">Название</label>
                         <input type="text" class="form-control" name="title" placeholder="Название">
@@ -24,19 +24,35 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="base_price" class="font-weight-bold">Базовая стоимость</label>
-                        <input type="text" class="form-control" name="base_price" placeholder="Базовая стоимость">
+                        <label for="base_price" class="font-weight-bold">Базовая цена</label>
+                        <input type="text" class="form-control" name="base_price" placeholder="Базовая цена">
                         @if ($errors->has('base_price'))
                             <div class="alert alert-danger">
-                                <!--{{ $errors->first('base_price') }}-->
-                                Укажите базовую стоимость
+                                Укажите базовую цену
                             </div>
                         @endif
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="old_price" class="font-weight-bold">Старая цена</label>
+                        <input type="text" class="form-control" name="old_price" placeholder="Старая цена">
                     </div>
                 </div>
             </div>
 
             <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="types" class="font-weight-bold">Тип</label>
+                        <select id="types" name="types" class="form-control">
+                            <option disabled selected>Выберите</option>
+                            @foreach($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label class="font-weight-bold">Стиль</label>
@@ -97,6 +113,22 @@
                         @if ($errors->has('manufacturers'))
                             <div class="alert alert-danger">
                                 Укажите производителя
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="font-weight-bold">Срок изготовления</label>
+                        <select name="productions" class="form-control">
+                            <option disabled selected value> -- Выберите срок изготовления -- </option>
+                            @foreach ($productions as $production)
+                                <option value="{{ $production->id }}">{{ $production->name }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('productions'))
+                            <div class="alert alert-danger">
+                                Укажите срок изготовления
                             </div>
                         @endif
                     </div>

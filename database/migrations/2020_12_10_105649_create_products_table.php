@@ -13,6 +13,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->decimal('base_price')->default('0');
+            $table->decimal('old_price')->nullable();
             $table->timestamps();
         });
     }

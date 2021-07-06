@@ -50,6 +50,11 @@ class Product extends Model
         return $this->belongsToMany('App\Models\Manufacturer');
     }
 
+    public function productions()
+    {
+        return $this->belongsToMany('App\Models\Production');
+    }
+
     public function other_products()
     {
         return $this->belongsToMany('App\Models\Product', 'product_product', 'product_id', 'oproduct_id');

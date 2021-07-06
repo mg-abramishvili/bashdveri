@@ -17,7 +17,10 @@
                 @forelse($products as $product)
                 <tr>
                     <td style="text-align: left; padding-left: 20px; padding-right: 20px;">
-                        {{$product->title}}
+                        {{ $product->title }}
+                        <span style="color: #999;">
+                            @foreach($product->types as $pt){{ $pt->name }}@endforeach
+                        </span>
                     </td>
                     <td style="width: 200px; text-align: center;">
                         <a href="/backend/product/{{$product->id}}/edit" class="btn btn-sm btn-warning">Изменить</a>

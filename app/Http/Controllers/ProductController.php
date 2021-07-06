@@ -8,6 +8,7 @@ use App\Models\Size;
 use App\Models\Type;
 use App\Models\Surface;
 use App\Models\Manufacturer;
+use App\Models\Production;
 use App\Models\Construct;
 use App\Models\Style;
 use Illuminate\Http\Request;
@@ -22,23 +23,26 @@ class ProductController extends Controller
 
     public function products_create()
     {
-        $styles = Style::all();
-        $constructs = Construct::all();
-        $surfaces = Surface::all();
-        $manufacturers = Manufacturer::all();
-        return view('backend.products.create', compact('styles', 'constructs', 'surfaces', 'manufacturers'));
-    }
-
-    public function product_edit($id)
-    {
-        $product = Product::with('styles', 'other_products')->find($id);
-        $products = Product::with('other_products')->get();
         $types = Type::all();
         $styles = Style::all();
         $constructs = Construct::all();
         $surfaces = Surface::all();
         $manufacturers = Manufacturer::all();
-        return view('backend.products.edit', compact('product', 'products', 'types', 'styles', 'constructs', 'surfaces', 'manufacturers'));
+        $productions = Production::all();
+        return view('backend.products.create', compact('styles', 'types', 'constructs', 'surfaces', 'manufacturers', 'productions'));
+    }
+
+    public function product_edit($id)
+    {
+        $product = Product::with('styles', 'other_products')->find($id);
+        $products = Product::where('title', 'LIKE', '%' . $product->title . '%')->get();
+        $types = Type::all();
+        $styles = Style::all();
+        $constructs = Construct::all();
+        $surfaces = Surface::all();
+        $manufacturers = Manufacturer::all();
+        $productions = Production::all();
+        return view('backend.products.edit', compact('product', 'products', 'types', 'styles', 'constructs', 'surfaces', 'manufacturers', 'productions'));
     }
 
     public function products_delete($id)
@@ -64,6 +68,9 @@ class ProductController extends Controller
         $products->title = $data['title'];
         $products->base_price = $data['base_price'];
 
+        if (!empty($data['old_price'])) {
+            $products->old_price = $data['old_price'];
+        }
         if (!empty($data['description'])) {
             $products->description = $data['description'];
         }
@@ -73,6 +80,8 @@ class ProductController extends Controller
         $products->constructs()->attach($request->constructs, ['product_id' => $products->id]);
         $products->surfaces()->attach($request->surfaces, ['product_id' => $products->id]);
         $products->manufacturers()->attach($request->manufacturers, ['product_id' => $products->id]);
+        $products->productions()->attach($request->productions, ['product_id' => $products->id]);
+        $products->types()->attach($request->types, ['product_id' => $products->id]);
         return redirect('/backend/products');
     }
 
@@ -91,7 +100,10 @@ class ProductController extends Controller
         $products = Product::find($data['id']);
         $products->title = $data['title'];
         $products->base_price = $data['base_price'];
-
+        
+        if (!empty($data['old_price'])) {
+            $products->old_price = $data['old_price'];
+        }
         if (!empty($data['description'])) {
             $products->description = $data['description'];
         }
@@ -105,6 +117,8 @@ class ProductController extends Controller
         $products->surfaces()->attach($request->surfaces, ['product_id' => $products->id]);
         $products->manufacturers()->detach();
         $products->manufacturers()->attach($request->manufacturers, ['product_id' => $products->id]);
+        $products->productions()->detach();
+        $products->productions()->attach($request->productions, ['product_id' => $products->id]);
         $products->types()->detach();
         $products->types()->attach($request->types, ['product_id' => $products->id]);
         $products->other_products()->detach();
@@ -171,8 +185,8 @@ class ProductController extends Controller
         $data = request()->all();
         $products = Product::find($data['id']);
         $size = new Size([
-            'size' => $data['size'],
-            'size_price' => $data['size_price']
+            'name' => $data['size_name'],
+            'price' => $data['size_price'],
         ]);
 
         $products->sizes()->save($size);
@@ -182,8 +196,8 @@ class ProductController extends Controller
     public function updateSize(Request $request) {
         $data = request()->all();
         $size = Size::find($data['id']);
-        $size->size = $data['size'];
-        $size->size_price = $data['size_price'];
+        $size->name = $data['size_name'];
+        $size->price = $data['size_price'];
         $size->save();
         return back();
     }

@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             ConstructSeeder::class,
             ManufacturerSeeder::class,
             SurfaceSeeder::class,
+            TypeSeeder::class,
+            ProductionSeeder::class,
         ]);
     }
 }

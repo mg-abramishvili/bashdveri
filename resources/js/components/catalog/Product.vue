@@ -8,7 +8,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-8">
-                <h1 class="mt-0 mb-4">{{ product.title }}</h1>
+                <h1 class="mt-0 mb-2">{{ product.title }}</h1>
+
+                <template v-for="prodcution in product.productions">
+                    <div class="mb-4" style="color: #00c084;">{{ prodcution.name }}</div>
+                </template>
 
                 <div class="row product-info-buttons">
                     <div class="col-12 col-md-3">
@@ -74,11 +78,23 @@
                     </div>
                 </div>
 
+                <div class="row align-items-center mb-3">
+                    <div class="col-12 col-md-2">
+                        <strong>Размер</strong>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        <div class="sizes-box">
+                            <template v-for="size in product.sizes">
+                                <input type="radio" :id="'size_' + size.id" :value="size.id">
+                                <label :for="'size_' + size.id">{{ size.name }}</label>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="price my-4">{{ product.base_price }} ₽</div>
 
                 <a class="btn-standard">В корзину</a>
-
-                <div class="mt-4" style="color: #00c084;">В наличии</div>
             </div>
         </div>
 
