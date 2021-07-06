@@ -92,7 +92,10 @@
                     </div>
                 </div>
 
-                <div class="price my-4">{{ product.base_price }} ₽</div>
+                <div class="price my-4">
+                    <del v-if="product.old_price" style="font-weight: normal;">{{ parseInt(product.old_price).toFixed(0) }} ₽</del>
+                    {{ parseInt(product.base_price).toFixed(0) }} ₽
+                </div>
 
                 <a class="btn-standard">В корзину</a>
             </div>

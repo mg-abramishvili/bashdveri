@@ -2240,6 +2240,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -24759,7 +24762,18 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "price my-4" }, [
-            _vm._v(_vm._s(_vm.product.base_price) + " ₽")
+            _vm.product.old_price
+              ? _c("del", { staticStyle: { "font-weight": "normal" } }, [
+                  _vm._v(
+                    _vm._s(parseInt(_vm.product.old_price).toFixed(0)) + " ₽"
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(
+              "\n                " +
+                _vm._s(parseInt(_vm.product.base_price).toFixed(0)) +
+                " ₽\n            "
+            )
           ]),
           _vm._v(" "),
           _c("a", { staticClass: "btn-standard" }, [_vm._v("В корзину")])
